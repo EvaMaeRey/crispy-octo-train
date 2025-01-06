@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>My First Closeread – ggplot2 extenders 🫖</title>
+<title>My First Closeread – ggplot2poetryXclosereads 🫖</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">ggplot2 extenders 🫖</span>
+    <span class="navbar-title">ggplot2poetryXclosereads 🫖</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -171,9 +171,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Graphical poems with ggplot2.</p>
-<p>Closeread enables scrollytelling.</p>
-<p>ggplot2 allows you build up your plot bit by bit - to write ‘graphical poems’ (Wickham 2010). It is easy to gain insights simply by defining what aes</p>
+<p>ggplot2 allows you build up your plot bit by bit – to write ‘graphical poems’ (Wickham 2010). It is easy to gain insights simply by defining a data set to look at, the aesthetics (x position, y position, color, size, etc) that should represent variables from that data, and what geometric marks should take on those aesthetics. Inspired by this incrementalism, frameworks like camcorder, flipbookr, codehover exist to capture plot composition.</p>
 <p>Here is a graphical poem!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> cars) <span class="sc">+</span> <span class="co"># The first declaration you typically make is the dataframe to plot</span></span>
@@ -188,24 +186,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>But let’s read it ‘aloud’ now…</p>
+<p>Closeread helps walk people through and digest ideas suggesting a synergy with the gg world. With Closereads, maybe we can read this graphical poem ‘aloud’, and reflect on it a bit in plain language as we go. Here is a generic way to write out what <code>closereads</code> requires for creating plot output and referring to it.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>knit_code<span class="sc">$</span><span class="fu">get</span>(<span class="st">"walkthrough"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">code_raw =</span> _) <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">comment =</span> <span class="fu">str_extract</span>(code_raw, <span class="st">"#.+$"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">comment =</span> <span class="fu">str_remove</span>(comment, <span class="st">"#"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">code =</span> <span class="fu">str_remove</span>(code_raw, <span class="st">"</span><span class="sc">\\</span><span class="st">+ #.+$|#.+$"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">index =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plot_name =</span> <span class="fu">paste</span>(<span class="st">"walkthrough"</span>, <span class="at">sep =</span> <span class="st">"-"</span>, index)) <span class="sc">|&gt;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">explosion =</span> cr_last_plot_construction) <span class="sc">|&gt;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">explosion =</span> <span class="fu">str_replace_all</span>(explosion, <span class="st">".PLOTXXX"</span>, plot_name)) <span class="sc">|&gt;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">explosion =</span> <span class="fu">str_replace</span>(explosion, <span class="st">".COMMENT"</span>, comment)) <span class="sc">|&gt;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">explosion =</span> <span class="fu">str_replace_all</span>(explosion, <span class="st">".CODE"</span>, code)) <span class="sc">|&gt;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">explosion =</span> <span class="fu">str_replace</span>(explosion, <span class="st">".LEADING"</span>, <span class="fu">ifelse</span>(index <span class="sc">==</span> <span class="dv">1</span>, <span class="st">""</span>, <span class="st">"last_plot() +"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(explosion) <span class="ot">-&gt;</span> </span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>to_closeread</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>to_closeread</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cr_last_plot_construction <span class="ot">&lt;-</span> <span class="st">':::{focus-on="cr-.PLOTXXX"}</span><span class="sc">\n</span><span class="st">.COMMENT, using `.CODE`</span><span class="sc">\n</span><span class="st">:::</span><span class="sc">\n\n</span><span class="st">:::{#cr-.PLOTXXX}</span><span class="sc">\n</span><span class="st">```{r .PLOTXXX}</span><span class="sc">\n</span><span class="st">.LEADING</span><span class="sc">\n</span><span class="st">  .CODE</span><span class="sc">\n</span><span class="st">```</span><span class="sc">\n</span><span class="st">:::</span><span class="sc">\n</span><span class="st">'</span>  </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>cr_last_plot_construction <span class="sc">|&gt;</span> <span class="fu">cat</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>:::{focus-on="cr-.PLOTXXX"}
+.COMMENT, using `.CODE`
+:::
+
+:::{#cr-.PLOTXXX}
+```{r .PLOTXXX}
+.LEADING
+  .CODE
+```
+:::</code></pre>
+</div>
+</div>
+<p>Then we can look at our complete ‘graphical poem’, parse it, choreograph a line by line reveal - thanks Garrick and Emi for showing the way using powerful knitr::knit_code$get in Xaringan context! https://emitanaka.rbind.io/post/knitr-knitr-code/ At this point we aren’t being really careful with code parsing or replacement; flipbookr internals has some nicer parsing that might be useable and allow more incremental reveals in other contexts like datamanipulation and table creation. In contrast to the full reiterated code that we show in flipbookr w/ Xaringan w/ plot, we’ll use <code>last_plot() + new_code()</code> below. It just feels like a better fit.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>knit_code<span class="sc">$</span><span class="fu">get</span>(<span class="st">"walkthrough"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">code_raw =</span> _) <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">comment =</span> <span class="fu">str_extract</span>(code_raw, <span class="st">"#.+$"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">comment =</span> <span class="fu">str_remove</span>(comment, <span class="st">"#"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">code =</span> <span class="fu">str_remove</span>(code_raw, <span class="st">"</span><span class="sc">\\</span><span class="st">+ #.+$|#.+$"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">index =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plot_name =</span> <span class="fu">paste</span>(<span class="st">"walkthrough"</span>, <span class="at">sep =</span> <span class="st">"-"</span>, index)) <span class="sc">|&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">to_cr =</span> cr_last_plot_construction) <span class="sc">|&gt;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">to_cr =</span> <span class="fu">str_replace_all</span>(to_cr, <span class="st">".PLOTXXX"</span>, plot_name)) <span class="sc">|&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">to_cr =</span> <span class="fu">str_replace</span>(to_cr, <span class="st">".COMMENT"</span>, comment)) <span class="sc">|&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">to_cr =</span> <span class="fu">str_replace_all</span>(to_cr, <span class="st">".CODE"</span>, code)) <span class="sc">|&gt;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">to_cr =</span> <span class="fu">str_replace</span>(to_cr, <span class="st">".LEADING"</span>, <span class="fu">ifelse</span>(index <span class="sc">==</span> <span class="dv">1</span>, <span class="st">""</span>, <span class="st">"last_plot() +"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(to_cr) <span class="ot">-&gt;</span> </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>to_closeread</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>to_closeread</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] ":::{focus-on=\"cr-walkthrough-1\"}\n The first declaration you typically make is the dataframe to plot, using `ggplot(data = cars) `\n:::\n\n:::{#cr-walkthrough-1}\n```{r walkthrough-1}\n\n  ggplot(data = cars) \n```\n:::\n"                                                                                                           
 [2] ":::{focus-on=\"cr-walkthrough-2\"}\n The second declaration is what visual channels should represent which variables (here x and y position are used to represent speed and distance), using `  aes(x = speed, y = dist) `\n:::\n\n:::{#cr-walkthrough-2}\n```{r walkthrough-2}\nlast_plot() +\n    aes(x = speed, y = dist) \n```\n:::\n" 
@@ -213,6 +229,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [4] ":::{focus-on=\"cr-walkthrough-4\"}\n Finally we might be interested in making some predictions; what is the expected value (mean) of y given some x (here stopping distance given some speed upon breaking) , using `  geom_smooth() `\n:::\n\n:::{#cr-walkthrough-4}\n```{r walkthrough-4}\nlast_plot() +\n    geom_smooth() \n```\n:::\n"</code></pre>
 </div>
 </div>
+<p>Okay, ready for the closeread demonstration! (Comparing flipbookr/xaringan implementation what we are doing here, there’s probably greater focus on narration.) We’ll use <code>knitr::knit()</code> inline to get this done - <code>paste(knitr::knit(text = to_closeread, quiet = F), collapse = "\n\n")</code></p>
 <div class="cr-section cr-column-screen sidebar-left">
 <div class="narrative-col">
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-1">
@@ -240,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sticky-col-stack">
 <div id="cr-walkthrough-1" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> cars) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> cars) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -252,8 +269,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-2" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> speed, <span class="at">y =</span> dist) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> speed, <span class="at">y =</span> dist) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -265,8 +282,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-3" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -278,8 +295,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-4" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -720,7 +737,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© Copyright 2023, Gina Reynolds, Teun van den Brand</p>
+<p>© Copyright 2024, Gina Reynolds</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
