@@ -9,8 +9,6 @@ website:
   repo-actions: [edit, issue]
   navbar:
     left:
-      - href: index.qmd
-        text: Home
       - href: closereads-chunk-reveal.qmd
         text: Discuss
 
