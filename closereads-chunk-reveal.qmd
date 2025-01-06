@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = T, message = F, warning = F)
 
 
 
-ggplot2 allows you build up your plot bit by bit -- to write 'graphical poems' (Wickham 2010).  It is easy to gain insights simply by defining a data set to look at, the aesthetics (x position, y position, color, size, etc) that should represent variables from that data, and what geometric marks should take on those aesthetics. Inspired by this incrementalism, frameworks like camcorder, flipbookr, codehover exist to capture plot composition.
+ggplot2 allows you build up your plot bit by bit -- to write 'graphical poems' (Wickham 2010).  It is easy to gain insights simply by 1. defining a data set to look at, 2. the aesthetics (x position, y position, color, size, etc) that should represent variables from that data, and 3. what geometric marks should take on those aesthetics. Inspired by this incrementalism, frameworks like camcorder, flipbookr, codehover exist to capture plot composition.
 
 Here is a graphical poem!
 
