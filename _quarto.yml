@@ -3,13 +3,15 @@ project:
   output-dir: docs
 
 website:
-  title: "ggplot2poetryXclosereads 🫖"
+  title: "Everyday ggplot2 extension: sublayer modularity 🫖"
   reader-mode: true
   repo-url: https://github.com/teunbrand/ggplot-extension-club
   repo-actions: [edit, issue]
   navbar:
     left:
       - href: closereads-chunk-reveal.qmd
+        text: Discuss
+      - href: ggplot2-sublayer-modularity.qmd
         text: Discuss
 
     tools:

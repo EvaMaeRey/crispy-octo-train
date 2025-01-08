@@ -10,4 +10,3 @@ Our main activities are [meetings](./meetings.html) and [discussions](./discussi
 Interested in joining us? Please leave your contact info [here](https://docs.google.com/forms/d/e/1FAIpQLSe3M1KwUPrmTfEGuuQp0fZ0J7dZkk_82gb310JCvdouMTa_7Q/viewform) and let us know a little about your interest in ggplot2 extension so we can be in touch!
 
 Note that the extension ecosystem is extensive and other initiatives exist to support extenders, check out some [other resources](./additional-resources.html).
-
