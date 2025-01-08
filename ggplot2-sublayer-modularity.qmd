@@ -10,8 +10,6 @@ cars <- tibble(cars)
 knitr::opts_chunk$set(echo = T, message = F, warning = F)
 ```
 
-
-
 ::: cr-section
 ::: {focus-on="cr-PLOT000"}
 If you are a fan of ggplot2, you are probably also a fan of 'layer' functions: `geom_*` and `stat_*` functions.
@@ -99,11 +97,9 @@ Stats themselves have a number of control elements.
 ::: {#cr-PLOT2e}
 ![](images/clipboard-2172743515.png)
 
-
-<!-- ```{r PLOT2e} -->
-<!-- StatCount -->
-<!-- ``` -->
-
+```{r PLOT2e}
+StatCount |> names()
+```
 :::
 
 ::: {focus-on="cr-PLOT2f"}
@@ -115,7 +111,6 @@ Critically, it can transform input plot input data before it is passed off to be
 StatCount$compute_group
 ```
 :::
-
 
 ::: {focus-on="cr-PLOT3"}
 We can get a sense of `StatCount$compute_group`'s behavior by using on our data. First, we use `select()` to make the data look as it would inside of the ggplot2 plotting environment. Then we see that the data is collapsed by `x`, and `count` and `prop` variables are produced.
@@ -151,22 +146,19 @@ precomputation |>
 ```
 :::
 
-::: {focus-on="cr-PLOT4.2"}
+::: {focus-on="cr-PLOT4a"}
 Key point: We might think Stat's job as doing heavy lifting - some pre-computation that the user might otherwise be responsible for.
 :::
 
-
-::: {#cr-PLOT4.2}
+::: {#cr-PLOT4a}
 ![](images/clipboard-3717409450.png)
 :::
 
-
-::: {focus-on="cr-PLOT4.3"}
+::: {focus-on="cr-PLOT4b"}
 One final question you might have is 'how do we get the height of the bar, `y`? Why does that 'just work'?
 :::
 
-
-::: {#cr-PLOT4.3}
+::: {#cr-PLOT4b}
 ![](images/clipboard-482897444.png)
 :::
 
@@ -227,8 +219,7 @@ Above, we've had an *outside*-in look at some aspects of 'sublayer modularity'. 
 :::
 
 ::: {#cr-PLOT6}
-![](images/clipboard-3862730267.png)
+![](images/clipboard-2051185906.png)
 :::
-
 
 :::
