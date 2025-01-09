@@ -14,8 +14,14 @@ knitr::opts_chunk$set(echo = T, message = F, warning = F)
 
 ::: {focus-on="cr-PLOT000"}
 If you are a fan of ggplot2, you are probably also a fan of 'layer' functions `geom_*()` and `stat_*()`.
+:::
 
-Sidenote: Sometimes *all* the ggplot2 functions are referred to as ggplot2 layers scales\_\*(), coord\_\*(), etc. You often hear things like 'build up your plot layer-by-layer' but we are using the word in the narrower, original sense.
+::: {focus-on="cr-PLOT000"}
+Important clarification before we begin: Sometimes *all* the ggplot2 functions are referred to as ggplot2 'layers', i.e. scales\_\*(), coord\_\*(), etc as in 'build up your plot layer-by-layer'. *
+:::
+
+::: {focus-on="cr-PLOT000"}
+But we are using the word in the narrower, sense used in the ggplot2 documentation.
 :::
 
 ::: {#cr-PLOT000}
@@ -145,13 +151,11 @@ Stat's computation is defined in the compute slots.
 And in `StatCount`, compute is done group-wise, so `compute_group()` defines StatCount's data transformation.
 :::
 
-<div>
-
+::: {#cr-PLOT2f}
 ```{r PLOT2f}
 StatCount$compute_group
 ```
-
-</div>
+:::
 
 ::: {focus-on="cr-PLOT3"}
 We can get a sense of `StatCount$compute_group`'s behavior by using on our data.
