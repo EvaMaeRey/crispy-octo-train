@@ -1,6 +1,6 @@
 ---
 title: "ggplot2 sublayer modularity"
-subtitle: "a brief, gentle and whimsical first-look behind the curtains of layers"
+subtitle: "a brief, gentle and whimsical first-look behind the curtains of ggplot2's layers"
 format: closeread-html
 ---
 
@@ -11,8 +11,11 @@ knitr::opts_chunk$set(echo = T, message = F, warning = F)
 ```
 
 ::: cr-section
+
 ::: {focus-on="cr-PLOT000"}
 If you are a fan of ggplot2, you are probably also a fan of 'layer' functions `geom_*()` and `stat_*()`.
+
+Sidenote: Sometimes *all* the ggplot2 functions are referred to as ggplot2 layers scales\_\*(), coord\_\*(), etc. You often hear things like 'build up your plot layer-by-layer' but we are using the word in the narrower, original sense.
 :::
 
 ::: {#cr-PLOT000}
@@ -20,7 +23,7 @@ If you are a fan of ggplot2, you are probably also a fan of 'layer' functions `g
 :::
 
 ::: {focus-on="cr-PLOT00"}
-Maybe you get giddy thinking about `geom_bump` `geom_ridgelines`, or classic `geom_histogram`?
+Maybe you get giddy thinking about `geom_bump()`,  `geom_ridgeline()`, or classic `geom_histogram()`?
 :::
 
 ::: {#cr-PLOT00}
@@ -28,7 +31,7 @@ Maybe you get giddy thinking about `geom_bump` `geom_ridgelines`, or classic `ge
 :::
 
 ::: {focus-on="cr-PLOT0"}
-Well-composed layers afford more fluid analytic discovery. 
+Well-composed `geom_*()`s and `stat_*()`s (i.e. layer) make for more fluid analytic discovery.
 :::
 
 ::: {focus-on="cr-PLOT0"}
@@ -41,6 +44,8 @@ But what elements constitute a layer function?
 
 ::: {focus-on="cr-PLOT1"}
 Let's look at `geom_bar()` to get a feel for what layer composition means.
+
+In this plot specification, geom_bar() counts the number of observations that are of each value of x (cut).
 :::
 
 ::: {#cr-PLOT1}
@@ -52,29 +57,27 @@ ggplot(diamonds) +
 ```
 :::
 
-
 ::: {focus-on="cr-PLOT2b"}
 There are actually *three* main characters in every `geom_()` or `stat_()`.
 :::
 
 They are `geom`, `stat`, and `position`.
 
-In `geom_bar()` the `geom` is fixed, but `stat` and `position` are adjustable.  You can see that their defaults are `"count"` and `"stack"` in the geom_bar definition.
+In `geom_bar()` the `geom` is fixed, but `stat` and `position` are adjustable. You can see that their defaults are `"count"` and `"stack"` in the function's definition.
 
 ::: {#cr-PLOT2b}
 ![](images/clipboard-309178775.png)
+
 ```{r}
 geom_bar
 ```
-
 :::
 
 ::: {focus-on="cr-PLOT2a"}
-But, instead of using convenient `geom_bar()`, we can use the more generic `layer()` function - which is actually used under the hood to define all geom_ and stat_ functions.  
+But instead of using convenient `geom_bar()`, we can use the more generic `layer()` function - which is actually used under the hood to define all `geom_*()` and `stat_*()` functions.
 :::
 
-
-We can reproduce the same behavior with `layer()`, but we must provide all three 'control operators'. `layer(geom = "bar", stat = "count", position = "stack")`.
+We can reproduce \`geom_bar()\`'s behavior with `layer()`, but we must provide all three 'control operators':`layer(geom = "bar", stat = "count", position = "stack")`.
 
 ::: {#cr-PLOT2a}
 ```{r PLOT2a}
@@ -86,7 +89,7 @@ ggplot(diamonds) +
 :::
 
 ::: {focus-on="cr-PLOT2c"}
-Or, equivalently, we can simply name the underlying `ggproto` *objects*, e.g. `GeomBar`, `StatCount`, and position function, `position_stack()` .
+Or, equivalently, we can simply name the underlying `ggproto` *objects*, `GeomBar` and `StatCount` in our case, and the position function, `position_stack()` .
 :::
 
 ::: {#cr-PLOT2c}
@@ -98,29 +101,24 @@ ggplot(diamonds) +
 ```
 :::
 
-
 ::: {focus-on="cr-PLOT2f"}
-Reiteration:   *There are actually 'control operators' that define `geom_*` and `stat_*` function.  `geom`, `stat`, and `position`. *
+Reiteration: There are actually 'control operators' that define the `geom_*()` and `stat_*()` user-facing function. Geoms, Stats, and `position_*()`.
 :::
 
 ::: {focus-on="cr-PLOT2f"}
-*You can refer to them indirectly by quoting their stem, `layer(geom = "bar", stat = "count", position = "stack")`.*, 
+You can refer to them *indirectly* by quoting their stem, `layer(geom = "bar", stat = "count", position = "stack")`.
 :::
 
-
 ::: {focus-on="cr-PLOT2f"}
-
-*Or use them directly, `layer(geom = GeomBar, stat = StatCount, position = position_stack())`*
-
+Or use the ggproto objects and position function *directly*, `layer(geom = GeomBar, stat = StatCount, position = position_stack())`
 :::
 
 ::: {#cr-PLOT2f}
 ![](images/clipboard-309178775.png)
 :::
 
-
 ::: {focus-on="cr-PLOT2d"}
-Focus: *Lets look at one 'control operator', Stat, more closely.*
+Focus: *Lets look at one 'control operator', the Stat, more closely.*
 :::
 
 ::: {#cr-PLOT2d}
@@ -140,17 +138,27 @@ StatCount |> names()
 :::
 
 ::: {focus-on="cr-PLOT2f"}
-Critically, it can transform input plot input data before it is passed off to be rendered. Compute is defined in the compute slots, and in `StatCount`, compute is done group-wise, so `compute_group()` defines StatCount's data transformation.
+It transforms plot input data before it is passed off to be rendered. 
+
+Stat's computation is defined in the compute slots.
+
+And in `StatCount`, compute is done group-wise, so `compute_group()` defines StatCount's data transformation.
 :::
 
-::: {#cr-PLOT2f}
+<div>
+
 ```{r PLOT2f}
 StatCount$compute_group
 ```
-:::
+
+</div>
 
 ::: {focus-on="cr-PLOT3"}
-We can get a sense of `StatCount$compute_group`'s behavior by using on our data. First, we use `select()` to make the data look as it would inside of the ggplot2 plotting environment. Then we see that the data is collapsed by `x`, and `count` and `prop` variables are produced.
+We can get a sense of `StatCount$compute_group`'s behavior by using on our data.
+
+First, we use `select()` to make the data look as it would inside of the ggplot2 plotting environment — this mirrors the `aes(x = cut)` mapping declaration.
+
+Then we see that the data is collapsed by `x`, and `count` and `prop` variables are produced.
 :::
 
 ::: {#cr-PLOT3}
@@ -165,7 +173,7 @@ diamonds |>
 :::
 
 ::: {focus-on="cr-PLOT4"}
-We can think about StatCount's job as doing some computation that the user might otherwise be responsible for. 
+We can think about StatCount's job as doing some computation that the user might otherwise be responsible for.
 :::
 
 We use StatCount\$compute_group() to manually do this computation for us, in conjunction with StatIdentity (leaves data alone) in `layer` to show this work explicitly.
@@ -186,7 +194,7 @@ precomputation |>
 :::
 
 ::: {focus-on="cr-PLOT4a"}
-Key point: *We might think Stat's job as doing heavy lifting - computation that the user might otherwise be responsible for before plotting.*
+Key point: *We might think Stat's job as lightening the analyst's load - doing computation that the user would otherwise need to do for before plotting.*
 :::
 
 ::: {#cr-PLOT4a}
@@ -194,7 +202,7 @@ Key point: *We might think Stat's job as doing heavy lifting - computation that 
 :::
 
 ::: {focus-on="cr-PLOT4b"}
-One final question you might have is 'how do we get the height of the bar, `y`? Why does that 'just work'?
+One final question you might have is 'how exactly is the height of the bar, `y`, communicated to the ggplot2 system? Why does that *just work*?
 :::
 
 ::: {#cr-PLOT4b}
@@ -202,7 +210,9 @@ One final question you might have is 'how do we get the height of the bar, `y`? 
 :::
 
 ::: {focus-on="cr-PLOT5"}
-This is managed by the `default_aes` specification for StatCount. Because there is no variable mapped to y in our plot specification, y position default to after_stat(count), the `count` variable that results from the StatCount computation.
+This is managed by the `default_aes` specification for StatCount.
+
+Because there is no variable mapped to y in our plot specification, y position defaults to `after_stat(count)`, in other words the *computed variable* `count` that results from the StatCount computation!
 :::
 
 ::: {#cr-PLOT5}
@@ -218,7 +228,7 @@ ggplot(data = diamonds) +
 :::
 
 ::: {focus-on="cr-PLOT5bb"}
-And it is good to do a little mix and match thinking to get a further feel for StatCount. Which of the following plots will have identical outputs?
+And it is good to do a little mix-and-match thinking to get a further feel for StatCount. Which of the following plots will have identical outputs?
 :::
 
 ::: {#cr-PLOT5bb}
@@ -254,7 +264,7 @@ p2+ p3 + p4 + p5
 :::
 
 ::: {focus-on="cr-PLOT6"}
-Above, we've had an *outside*-in look at some aspects of 'sublayer modularity'. 
+Above, we've had an *outside*-in look at some aspects of 'sublayer modularity'.
 
 To get an *inside*-out look --- building up your *own* Stat from scratch --- you might have a look at ['easy geom recipes'](https://evamaerey.github.io/easy-geom-recipes/) or by joining [ggplot2 extenders club](https://teunbrand.github.io/ggplot-extension-club/)
 :::
@@ -262,5 +272,4 @@ To get an *inside*-out look --- building up your *own* Stat from scratch --- you
 ::: {#cr-PLOT6}
 ![](images/clipboard-2051185906.png)
 :::
-
 :::

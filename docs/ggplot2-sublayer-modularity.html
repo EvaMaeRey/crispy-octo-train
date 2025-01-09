@@ -159,7 +159,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">ggplot2 sublayer modularity</h1>
-<p class="subtitle lead">a brief, gentle and whimsical first-look behind the curtains of layers</p>
+<p class="subtitle lead">a brief, gentle and whimsical first-look behind the curtains of ggplot2’s layers</p>
 </div>
 
 
@@ -181,16 +181,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="trigger new-trigger" data-focus-on="cr-PLOT000">
 <div class="narrative">
 <p>If you are a fan of ggplot2, you are probably also a fan of ‘layer’ functions <code>geom_*()</code> and <code>stat_*()</code>.</p>
+<p>Sidenote: Sometimes <em>all</em> the ggplot2 functions are referred to as ggplot2 layers scales_*(), coord_*(), etc. You often hear things like ‘build up your plot layer-by-layer’ but we are using the word in the narrower, original sense.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT00">
 <div class="narrative">
-<p>Maybe you get giddy thinking about <code>geom_bump</code> <code>geom_ridgelines</code>, or classic <code>geom_histogram</code>?</p>
+<p>Maybe you get giddy thinking about <code>geom_bump()</code>, <code>geom_ridgeline()</code>, or classic <code>geom_histogram()</code>?</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT0">
 <div class="narrative">
-<p>Well-composed layers afford more fluid analytic discovery.</p>
+<p>Well-composed <code>geom_*()</code>s and <code>stat_*()</code>s (i.e.&nbsp;layer) make for more fluid analytic discovery.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT0">
@@ -201,6 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="trigger new-trigger" data-focus-on="cr-PLOT1">
 <div class="narrative">
 <p>Let’s look at <code>geom_bar()</code> to get a feel for what layer composition means.</p>
+<p>In this plot specification, geom_bar() counts the number of observations that are of each value of x (cut).</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT2b">
@@ -215,42 +217,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="trigger">
 <div class="narrative">
-<p>In <code>geom_bar()</code> the <code>geom</code> is fixed, but <code>stat</code> and <code>position</code> are adjustable. You can see that their defaults are <code>"count"</code> and <code>"stack"</code> in the geom_bar definition.</p>
+<p>In <code>geom_bar()</code> the <code>geom</code> is fixed, but <code>stat</code> and <code>position</code> are adjustable. You can see that their defaults are <code>"count"</code> and <code>"stack"</code> in the function’s definition.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT2a">
 <div class="narrative">
-<p>But, instead of using convenient <code>geom_bar()</code>, we can use the more generic <code>layer()</code> function - which is actually used under the hood to define all geom_ and stat_ functions.</p>
+<p>But instead of using convenient <code>geom_bar()</code>, we can use the more generic <code>layer()</code> function - which is actually used under the hood to define all <code>geom_*()</code> and <code>stat_*()</code> functions.</p>
 </div>
 </div>
 <div class="trigger">
 <div class="narrative">
-<p>We can reproduce the same behavior with <code>layer()</code>, but we must provide all three ‘control operators’. <code>layer(geom = "bar", stat = "count", position = "stack")</code>.</p>
+<p>We can reproduce `geom_bar()`‘s behavior with <code>layer()</code>, but we must provide all three ’control operators’:<code>layer(geom = "bar", stat = "count", position = "stack")</code>.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT2c">
 <div class="narrative">
-<p>Or, equivalently, we can simply name the underlying <code>ggproto</code> <em>objects</em>, e.g.&nbsp;<code>GeomBar</code>, <code>StatCount</code>, and position function, <code>position_stack()</code> .</p>
+<p>Or, equivalently, we can simply name the underlying <code>ggproto</code> <em>objects</em>, <code>GeomBar</code> and <code>StatCount</code> in our case, and the position function, <code>position_stack()</code> .</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT2f">
 <div class="narrative">
-<p>Reiteration: <em>There are actually ‘control operators’ that define <code>geom_*</code> and <code>stat_*</code> function. <code>geom</code>, <code>stat</code>, and <code>position</code>. </em></p>
+<p>Reiteration: There are actually ‘control operators’ that define the <code>geom_*()</code> and <code>stat_*()</code> user-facing function. Geoms, Stats, and <code>position_*()</code>.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT2f">
 <div class="narrative">
-<p><em>You can refer to them indirectly by quoting their stem, <code>layer(geom = "bar", stat = "count", position = "stack")</code>.</em>,</p>
+<p>You can refer to them <em>indirectly</em> by quoting their stem, <code>layer(geom = "bar", stat = "count", position = "stack")</code>.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT2f">
 <div class="narrative">
-<p><em>Or use them directly, <code>layer(geom = GeomBar, stat = StatCount, position = position_stack())</code></em></p>
+<p>Or use the ggproto objects and position function <em>directly</em>, <code>layer(geom = GeomBar, stat = StatCount, position = position_stack())</code></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT2d">
 <div class="narrative">
-<p>Focus: <em>Lets look at one ‘control operator’, Stat, more closely.</em></p>
+<p>Focus: <em>Lets look at one ‘control operator’, the Stat, more closely.</em></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT2e">
@@ -260,12 +262,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT2f">
 <div class="narrative">
-<p>Critically, it can transform input plot input data before it is passed off to be rendered. Compute is defined in the compute slots, and in <code>StatCount</code>, compute is done group-wise, so <code>compute_group()</code> defines StatCount’s data transformation.</p>
+<p>It transforms plot input data before it is passed off to be rendered.</p>
+<p>Stat’s computation is defined in the compute slots.</p>
+<p>And in <code>StatCount</code>, compute is done group-wise, so <code>compute_group()</code> defines StatCount’s data transformation.</p>
+</div>
+</div>
+<div class="trigger">
+<div class="narrative">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>StatCount<span class="sc">$</span>compute_group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;ggproto method&gt;
+  &lt;Wrapper function&gt;
+    function (...) 
+compute_group(..., self = self)
+
+  &lt;Inner function (f)&gt;
+    function (self, data, scales, width = NULL, flipped_aes = FALSE) 
+{
+    data &lt;- flip_data(data, flipped_aes)
+    x &lt;- data$x
+    weight &lt;- data$weight %||% rep(1, length(x))
+    count &lt;- as.vector(rowsum(weight, x, na.rm = TRUE))
+    bars &lt;- data_frame0(count = count, prop = count/sum(abs(count)), 
+        x = sort(unique0(x)), width = width, flipped_aes = flipped_aes, 
+        .size = length(count))
+    flip_data(bars, flipped_aes)
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT3">
 <div class="narrative">
-<p>We can get a sense of <code>StatCount$compute_group</code>’s behavior by using on our data. First, we use <code>select()</code> to make the data look as it would inside of the ggplot2 plotting environment. Then we see that the data is collapsed by <code>x</code>, and <code>count</code> and <code>prop</code> variables are produced.</p>
+<p>We can get a sense of <code>StatCount$compute_group</code>’s behavior by using on our data.</p>
+<p>First, we use <code>select()</code> to make the data look as it would inside of the ggplot2 plotting environment — this mirrors the <code>aes(x = cut)</code> mapping declaration.</p>
+<p>Then we see that the data is collapsed by <code>x</code>, and <code>count</code> and <code>prop</code> variables are produced.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT4">
@@ -280,22 +312,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT4a">
 <div class="narrative">
-<p>Key point: <em>We might think Stat’s job as doing heavy lifting - computation that the user might otherwise be responsible for before plotting.</em></p>
+<p>Key point: <em>We might think Stat’s job as lightening the analyst’s load - doing computation that the user would otherwise need to do for before plotting.</em></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT4b">
 <div class="narrative">
-<p>One final question you might have is ‘how do we get the height of the bar, <code>y</code>? Why does that ’just work’?</p>
+<p>One final question you might have is ’how exactly is the height of the bar, <code>y</code>, communicated to the ggplot2 system? Why does that <em>just work</em>?</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT5">
 <div class="narrative">
-<p>This is managed by the <code>default_aes</code> specification for StatCount. Because there is no variable mapped to y in our plot specification, y position default to after_stat(count), the <code>count</code> variable that results from the StatCount computation.</p>
+<p>This is managed by the <code>default_aes</code> specification for StatCount.</p>
+<p>Because there is no variable mapped to y in our plot specification, y position defaults to <code>after_stat(count)</code>, in other words the <em>computed variable</em> <code>count</code> that results from the StatCount computation!</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT5bb">
 <div class="narrative">
-<p>And it is good to do a little mix and match thinking to get a further feel for StatCount. Which of the following plots will have identical outputs?</p>
+<p>And it is good to do a little mix-and-match thinking to get a further feel for StatCount. Which of the following plots will have identical outputs?</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT5c">
@@ -323,10 +356,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-PLOT1" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds) <span class="sc">+</span> </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> cut) <span class="sc">+</span> </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds) <span class="sc">+</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> cut) <span class="sc">+</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -339,7 +372,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="cr-PLOT2b" class="sticky">
 <p><img src="images/clipboard-309178775.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>geom_bar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>geom_bar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (mapping = NULL, data = NULL, stat = "count", position = "stack", 
     ..., just = 0.5, na.rm = FALSE, orientation = NA, show.legend = NA, 
@@ -350,17 +383,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         params = list2(just = just, na.rm = na.rm, orientation = orientation, 
             ...))
 }
-&lt;bytecode: 0x7ff65a752ca8&gt;
+&lt;bytecode: 0x7fc7b333c548&gt;
 &lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
 </div>
 <div id="cr-PLOT2a" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds) <span class="sc">+</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> cut) <span class="sc">+</span> </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layer</span>(<span class="at">geom =</span> <span class="st">"bar"</span>, <span class="at">stat =</span> <span class="st">"count"</span>, <span class="at">position =</span> <span class="st">"stack"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds) <span class="sc">+</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> cut) <span class="sc">+</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layer</span>(<span class="at">geom =</span> <span class="st">"bar"</span>, <span class="at">stat =</span> <span class="st">"count"</span>, <span class="at">position =</span> <span class="st">"stack"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -372,10 +405,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-PLOT2c" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds) <span class="sc">+</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> cut) <span class="sc">+</span> </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layer</span>(<span class="at">geom =</span> GeomBar, <span class="at">stat =</span> StatCount, <span class="at">position =</span> <span class="fu">position_stack</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diamonds) <span class="sc">+</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> cut) <span class="sc">+</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layer</span>(<span class="at">geom =</span> GeomBar, <span class="at">stat =</span> StatCount, <span class="at">position =</span> <span class="fu">position_stack</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -394,34 +427,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="cr-PLOT2e" class="sticky">
 <p><img src="images/clipboard-2172743515.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>StatCount <span class="sc">|&gt;</span> <span class="fu">names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>StatCount <span class="sc">|&gt;</span> <span class="fu">names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "default_aes"   "extra_params"  "super"         "compute_group"
 [5] "required_aes"  "setup_params"  "dropped_aes"  </code></pre>
-</div>
-</div>
-</div>
-<div id="cr-PLOT2f" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>StatCount<span class="sc">$</span>compute_group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;ggproto method&gt;
-  &lt;Wrapper function&gt;
-    function (...) 
-compute_group(..., self = self)
-
-  &lt;Inner function (f)&gt;
-    function (self, data, scales, width = NULL, flipped_aes = FALSE) 
-{
-    data &lt;- flip_data(data, flipped_aes)
-    x &lt;- data$x
-    weight &lt;- data$weight %||% rep(1, length(x))
-    count &lt;- as.vector(rowsum(weight, x, na.rm = TRUE))
-    bars &lt;- data_frame0(count = count, prop = count/sum(abs(count)), 
-        x = sort(unique0(x)), width = width, flipped_aes = flipped_aes, 
-        .size = length(count))
-    flip_data(bars, flipped_aes)
-}</code></pre>
 </div>
 </div>
 </div>
