@@ -1,6 +1,6 @@
 ---
 title: "ggplot2 sublayer modularity"
-subtitle: "a brief, gentle and fun first-look behind the curtains. "
+subtitle: "a brief, gentle and whimsical first-look behind the curtains of layers"
 format: closeread-html
 ---
 
@@ -59,12 +59,12 @@ There are actually *three* main characters in every `geom_()` or `stat_()`.
 
 They are `geom`, `stat`, and `position`.
 
-In `geom_bar()` the `geom` is fixed, but `stat` and `position` are adjustable - their defaults are `"count"` and `"stack"`.
+In `geom_bar()` the `geom` is fixed, but `stat` and `position` are adjustable.  You can see that their defaults are `"count"` and `"stack"` in the geom_bar definition.
 
 ::: {#cr-PLOT2b}
 ![](images/clipboard-309178775.png)
 ```{r}
-args(ggplot2::geom_bar)
+geom_bar
 ```
 
 :::
@@ -74,7 +74,7 @@ But, instead of using convenient `geom_bar()`, we can use the more generic `laye
 :::
 
 
-We can get the same behavior, but we must provide all three control operators... `layer(geom = "bar", stat = "count", position = "stack")`.
+We can reproduce the same behavior with `layer()`, but we must provide all three 'control operators'. `layer(geom = "bar", stat = "count", position = "stack")`.
 
 ::: {#cr-PLOT2a}
 ```{r PLOT2a}
@@ -86,7 +86,7 @@ ggplot(diamonds) +
 :::
 
 ::: {focus-on="cr-PLOT2c"}
-Or we can simply name the `ggproto` object or function which the quoted text in the variant above refers too: `GeomBar`, `StatCount`, and `position_stack()` are at work in the default settings for geom_bar().
+Or, equivalently, we can simply name the underlying `ggproto` *objects*, e.g. `GeomBar`, `StatCount`, and position function, `position_stack()` .
 :::
 
 ::: {#cr-PLOT2c}
@@ -100,11 +100,18 @@ ggplot(diamonds) +
 
 
 ::: {focus-on="cr-PLOT2f"}
-Reiteration:   *There are actually 'control operators' for every layer (geom_ or stat_ ) call: `geom`, `stat`, and `position`. *
+Reiteration:   *There are actually 'control operators' that define `geom_*` and `stat_*` function.  `geom`, `stat`, and `position`. *
+:::
 
-*You can refer to them indirectly by quoting their stem, `layer(geom = "bar", stat = "count", position = "stack")`*, 
+::: {focus-on="cr-PLOT2f"}
+*You can refer to them indirectly by quoting their stem, `layer(geom = "bar", stat = "count", position = "stack")`.*, 
+:::
 
-*or use them directly, `layer(geom = GeomBar, stat = StatCount, position = position_stack())`*
+
+::: {focus-on="cr-PLOT2f"}
+
+*Or use them directly, `layer(geom = GeomBar, stat = StatCount, position = position_stack())`*
+
 :::
 
 ::: {#cr-PLOT2f}
@@ -113,7 +120,7 @@ Reiteration:   *There are actually 'control operators' for every layer (geom_ or
 
 
 ::: {focus-on="cr-PLOT2d"}
-Focus: *Lets look at the second 'control operator' Stat, more closely.*
+Focus: *Lets look at one 'control operator', Stat, more closely.*
 :::
 
 ::: {#cr-PLOT2d}
@@ -158,8 +165,10 @@ diamonds |>
 :::
 
 ::: {focus-on="cr-PLOT4"}
-We can think about StatCount's job as doing some computation that the user might otherwise be responsible for. We use StatCount\$compute_group() to manually do this computation for us, in conjunction with StatIdentity in `layer` (leaves data alone) to explicitly show this work.
+We can think about StatCount's job as doing some computation that the user might otherwise be responsible for. 
 :::
+
+We use StatCount\$compute_group() to manually do this computation for us, in conjunction with StatIdentity (leaves data alone) in `layer` to show this work explicitly.
 
 ::: {#cr-PLOT4}
 ```{r PLOT4}

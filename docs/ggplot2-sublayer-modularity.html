@@ -159,7 +159,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">ggplot2 sublayer modularity</h1>
-<p class="subtitle lead">a brief, gentle and fun first-look behind the curtains.</p>
+<p class="subtitle lead">a brief, gentle and whimsical first-look behind the curtains of layers</p>
 </div>
 
 
@@ -215,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="trigger">
 <div class="narrative">
-<p>In <code>geom_bar()</code> the <code>geom</code> is fixed, but <code>stat</code> and <code>position</code> are adjustable - their defaults are <code>"count"</code> and <code>"stack"</code>.</p>
+<p>In <code>geom_bar()</code> the <code>geom</code> is fixed, but <code>stat</code> and <code>position</code> are adjustable. You can see that their defaults are <code>"count"</code> and <code>"stack"</code> in the geom_bar definition.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT2a">
@@ -225,24 +225,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="trigger">
 <div class="narrative">
-<p>We can get the same behavior, but we must provide all three control operators… <code>layer(geom = "bar", stat = "count", position = "stack")</code>.</p>
+<p>We can reproduce the same behavior with <code>layer()</code>, but we must provide all three ‘control operators’. <code>layer(geom = "bar", stat = "count", position = "stack")</code>.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT2c">
 <div class="narrative">
-<p>Or we can simply name the <code>ggproto</code> object or function which the quoted text in the variant above refers too: <code>GeomBar</code>, <code>StatCount</code>, and <code>position_stack()</code> are at work in the default settings for geom_bar().</p>
+<p>Or, equivalently, we can simply name the underlying <code>ggproto</code> <em>objects</em>, e.g.&nbsp;<code>GeomBar</code>, <code>StatCount</code>, and position function, <code>position_stack()</code> .</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT2f">
 <div class="narrative">
-<p>Reiteration: <em>There are actually ‘control operators’ for every layer (geom_ or stat_ ) call: <code>geom</code>, <code>stat</code>, and <code>position</code>. </em></p>
-<p><em>You can refer to them indirectly by quoting their stem, <code>layer(geom = "bar", stat = "count", position = "stack")</code></em>,</p>
-<p><em>or use them directly, <code>layer(geom = GeomBar, stat = StatCount, position = position_stack())</code></em></p>
+<p>Reiteration: <em>There are actually ‘control operators’ that define <code>geom_*</code> and <code>stat_*</code> function. <code>geom</code>, <code>stat</code>, and <code>position</code>. </em></p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-PLOT2f">
+<div class="narrative">
+<p><em>You can refer to them indirectly by quoting their stem, <code>layer(geom = "bar", stat = "count", position = "stack")</code>.</em>,</p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-PLOT2f">
+<div class="narrative">
+<p><em>Or use them directly, <code>layer(geom = GeomBar, stat = StatCount, position = position_stack())</code></em></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT2d">
 <div class="narrative">
-<p>Focus: <em>Lets look at the second ‘control operator’ Stat, more closely.</em></p>
+<p>Focus: <em>Lets look at one ‘control operator’, Stat, more closely.</em></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT2e">
@@ -262,7 +270,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT4">
 <div class="narrative">
-<p>We can think about StatCount’s job as doing some computation that the user might otherwise be responsible for. We use StatCount$compute_group() to manually do this computation for us, in conjunction with StatIdentity in <code>layer</code> (leaves data alone) to explicitly show this work.</p>
+<p>We can think about StatCount’s job as doing some computation that the user might otherwise be responsible for.</p>
+</div>
+</div>
+<div class="trigger">
+<div class="narrative">
+<p>We use StatCount$compute_group() to manually do this computation for us, in conjunction with StatIdentity (leaves data alone) in <code>layer</code> to show this work explicitly.</p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-PLOT4a">
@@ -326,12 +339,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="cr-PLOT2b" class="sticky">
 <p><img src="images/clipboard-309178775.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(ggplot2<span class="sc">::</span>geom_bar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>geom_bar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (mapping = NULL, data = NULL, stat = "count", position = "stack", 
     ..., just = 0.5, na.rm = FALSE, orientation = NA, show.legend = NA, 
     inherit.aes = TRUE) 
-NULL</code></pre>
+{
+    layer(data = data, mapping = mapping, stat = stat, geom = GeomBar, 
+        position = position, show.legend = show.legend, inherit.aes = inherit.aes, 
+        params = list2(just = just, na.rm = na.rm, orientation = orientation, 
+            ...))
+}
+&lt;bytecode: 0x7fd01c945c70&gt;
+&lt;environment: namespace:ggplot2&gt;</code></pre>
 </div>
 </div>
 </div>
