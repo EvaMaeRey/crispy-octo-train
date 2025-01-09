@@ -70,7 +70,7 @@ args(ggplot2::geom_bar)
 :::
 
 ::: {focus-on="cr-PLOT2a"}
-But, instead of using convenient `geom_bar()`, we can use the more generic `layer()` function - which is actually used under the hood to write all geom_ and stat_ functions.  
+But, instead of using convenient `geom_bar()`, we can use the more generic `layer()` function - which is actually used under the hood to define all geom_ and stat_ functions.  
 :::
 
 
