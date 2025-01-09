@@ -1,6 +1,6 @@
 ---
 title: "ggplot2 sublayer modularity"
-subtitle: "a brief, gentle and whimsical first-look behind the curtains of ggplot2's layers"
+subtitle: "a brief and whimsical first-look behind the curtains of ggplot2's layers"
 format: closeread-html
 ---
 
@@ -74,7 +74,7 @@ geom_bar
 :::
 
 ::: {focus-on="cr-PLOT2a"}
-But instead of using convenient `geom_bar()`, we can use the more generic `layer()` function - which is actually used under the hood to define all `geom_*()` and `stat_*()` functions.
+And instead of using convenient `geom_bar()`, we can use the more generic `layer()` function - which is actually used under the hood to define all `geom_*()` and `stat_*()` functions.
 :::
 
 We can reproduce \`geom_bar()\`'s behavior with `layer()`, but we must provide all three 'control operators':`layer(geom = "bar", stat = "count", position = "stack")`.
