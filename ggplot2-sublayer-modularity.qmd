@@ -216,7 +216,7 @@ One final question you might have is 'how exactly is the height of the bar, `y`,
 ::: {focus-on="cr-PLOT5"}
 This is managed by the `default_aes` specification for StatCount.
 
-Because there is no variable mapped to y in our plot specification, y position defaults to `after_stat(count)`, in other words the *computed variable* `count` that results from the StatCount computation!
+Because there is no variable mapped to y in our plot specification, y position defaults to `after_stat(count)`, in other words the *computed variable* `count` that is available *after* the StatCount computation is done!
 :::
 
 ::: {#cr-PLOT5}
