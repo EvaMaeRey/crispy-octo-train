@@ -16,7 +16,8 @@ user_repo_fun <- read_csv("https://raw.githubusercontent.com/EvaMaeRey/mytidytue
   mutate(prefix_short = fun_exported |> str_extract(".*?_")) %>% 
   mutate(prefix_long = fun_exported |> str_extract(".+_"))
 
-sample_n(user_repo_fun, 10)
+sample_n(user_repo_fun, 20) |>
+  knitr::kable()
 ```
 
 ```{r}
@@ -40,15 +41,13 @@ ggplot_add.filterobs <- function(object, plot, object_name) {
 
 
 
-ggplot2 allows you build up your plot bit by bit -- to write 'graphical poems' (Wickham 2010).  It is easy to gain insights simply by 1. defining a data set to look at, 2. the aesthetics (x position, y position, color, size, etc) that should represent variables from that data, and 3. what geometric marks should take on those aesthetics. Inspired by this incrementalism, frameworks like camcorder, flipbookr, codehover exist to capture plot composition.
 
 
 
 
 
 
-
-```{r, echo = F}
+```{r, echo = F, results='hide'}
 cr_last_plot_construction <- ':::{focus-on="cr-.PLOTXXX"}\n.COMMENT, using `.CODE`\n:::\n\n:::{#cr-.PLOTXXX}\n```{r .PLOTXXX}\n.LEADING\n  .CODE\n```\n:::\n'  
 
 cr_last_plot_construction |> cat()
@@ -91,16 +90,16 @@ to_closeread
 last_plot()$plot_data
 ```
 
-Here is the complete graphical poem!
+Here is the complete 'conversation' with the dataset!
 
 ```{r walkthrough, echo = T}
 ggplot(data = user_repo_fun) + # the data frame to be plotted is all the exported functions from the 
   aes(id = "All exported\n functions") + # let's look at a count of all the exported functions first
   ggcirclepack::geom_circlepack() + # Using circlepacking, we automatically have circles size representing the number of observation, i.e. exported functions
   ggcirclepack::geom_circlepack_text() + # Of course this is hard to interpret without some kind of label.  We use geom_circplepack_text to do this for us
+  coord_equal() + # and lets square up the circles
   ggchalkboard:::theme_glassboard() + # we'll add a theme
   theme(axis.line = element_blank(), axis.text = element_blank(), axis.ticks = element_blank()) + # And remove axes... 
-  coord_equal() + # and lets square up the circles
   aes(id = repo) + # First we ask what packages - github repository names - are present
   aes(id = user) + # Then let's look at who is writing these exported functions
   aes(id = prefix_short) + # And we can look at what types of functions are exported, by looking at prefixes

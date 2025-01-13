@@ -184,54 +184,187 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prefix_short =</span> fun_exported <span class="sc">|&gt;</span> <span class="fu">str_extract</span>(<span class="st">".*?_"</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prefix_long =</span> fun_exported <span class="sc">|&gt;</span> <span class="fu">str_extract</span>(<span class="st">".+_"</span>))</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_n</span>(user_repo_fun, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 5
-   user           repo      fun_exported                prefix_short prefix_long
-   &lt;chr&gt;          &lt;chr&gt;     &lt;chr&gt;                       &lt;chr&gt;        &lt;chr&gt;      
- 1 road2stat      ggsci     "scale_fill_ucscgb"         scale_       scale_fill_
- 2 thomasp85      gganimate "transition_time"           transition_  transition_
- 3 shikokuchuo    ichimoku  "oanda_chart"               oanda_       oanda_     
- 4 jrnold         ggthemes  "tableau_seq_gradient_pal"  tableau_     tableau_se…
- 5 jbengler       tidyplots "\"%&gt;%\""                   &lt;NA&gt;         &lt;NA&gt;       
- 6 davidgohel     ggiraph   "scale_linetype_interactiv… scale_       scale_line…
- 7 ggobi          ggally    "model_beta_variables"      model_       model_beta_
- 8 malcolmbarrett ggdag     "label"                     &lt;NA&gt;         &lt;NA&gt;       
- 9 jhrcook        ggasym    "scale_fill_br_gradient"    scale_       scale_fill…
-10 teunbrand      legendry  "GuideColourbar"            &lt;NA&gt;         &lt;NA&gt;       </code></pre>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_n</span>(user_repo_fun, <span class="dv">20</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 12%">
+<col style="width: 34%">
+<col style="width: 14%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">user</th>
+<th style="text-align: left;">repo</th>
+<th style="text-align: left;">fun_exported</th>
+<th style="text-align: left;">prefix_short</th>
+<th style="text-align: left;">prefix_long</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">kassambara</td>
+<td style="text-align: left;">survminer</td>
+<td style="text-align: left;">pairwise_survdiff</td>
+<td style="text-align: left;">pairwise_</td>
+<td style="text-align: left;">pairwise_</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">msberends</td>
+<td style="text-align: left;">AMR</td>
+<td style="text-align: left;">atc_online_ddd_units</td>
+<td style="text-align: left;">atc_</td>
+<td style="text-align: left;">atc_online_ddd_</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">davidgohel</td>
+<td style="text-align: left;">ggiraph</td>
+<td style="text-align: left;">scale_color_stepsn_interactive</td>
+<td style="text-align: left;">scale_</td>
+<td style="text-align: left;">scale_color_stepsn_</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">thackl</td>
+<td style="text-align: left;">gggenomes</td>
+<td style="text-align: left;">theme_gggenomes_clean</td>
+<td style="text-align: left;">theme_</td>
+<td style="text-align: left;">theme_gggenomes_</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">clauswilke</td>
+<td style="text-align: left;">ggridges</td>
+<td style="text-align: left;">PositionPointsJitter</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">easystats</td>
+<td style="text-align: left;">see</td>
+<td style="text-align: left;">scale_fill_see_c</td>
+<td style="text-align: left;">scale_</td>
+<td style="text-align: left;">scale_fill_see_</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lionel-</td>
+<td style="text-align: left;">ggstance</td>
+<td style="text-align: left;">stat_counth</td>
+<td style="text-align: left;">stat_</td>
+<td style="text-align: left;">stat_</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">davidhodge931</td>
+<td style="text-align: left;">ggblanket</td>
+<td style="text-align: left;">weave_geom_defaults</td>
+<td style="text-align: left;">weave_</td>
+<td style="text-align: left;">weave_geom_</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">davidhodge931</td>
+<td style="text-align: left;">ggblanket</td>
+<td style="text-align: left;">gg_raster</td>
+<td style="text-align: left;">gg_</td>
+<td style="text-align: left;">gg_</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dieghernan</td>
+<td style="text-align: left;">tidyterra</td>
+<td style="text-align: left;">scale_color_hypso_d</td>
+<td style="text-align: left;">scale_</td>
+<td style="text-align: left;">scale_color_hypso_</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">marcmenem</td>
+<td style="text-align: left;">ggshadow</td>
+<td style="text-align: left;">geom_shadowstep</td>
+<td style="text-align: left;">geom_</td>
+<td style="text-align: left;">geom_</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">thomasp85</td>
+<td style="text-align: left;">ggforce</td>
+<td style="text-align: left;">geom_autohistogram</td>
+<td style="text-align: left;">geom_</td>
+<td style="text-align: left;">geom_</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">eliocamp</td>
+<td style="text-align: left;">ggperiodic</td>
+<td style="text-align: left;">setunperiodic</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">teunbrand</td>
+<td style="text-align: left;">legendry</td>
+<td style="text-align: left;">gizmo_grob</td>
+<td style="text-align: left;">gizmo_</td>
+<td style="text-align: left;">gizmo_</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">daattali</td>
+<td style="text-align: left;">ggExtra</td>
+<td style="text-align: left;">removeGridX</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dieghernan</td>
+<td style="text-align: left;">tidyterra</td>
+<td style="text-align: left;">slice_tail</td>
+<td style="text-align: left;">slice_</td>
+<td style="text-align: left;">slice_</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">briatte</td>
+<td style="text-align: left;">ggnetwork</td>
+<td style="text-align: left;">geom_nodelabel_repel</td>
+<td style="text-align: left;">geom_</td>
+<td style="text-align: left;">geom_nodelabel_</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">teunbrand</td>
+<td style="text-align: left;">legendry</td>
+<td style="text-align: left;">key_manual</td>
+<td style="text-align: left;">key_</td>
+<td style="text-align: left;">key_</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ProjectMOSAIC</td>
+<td style="text-align: left;">ggformula</td>
+<td style="text-align: left;">stat_qqline</td>
+<td style="text-align: left;">stat_</td>
+<td style="text-align: left;">stat_</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">thomasp85</td>
+<td style="text-align: left;">ggraph</td>
+<td style="text-align: left;">scale_edge_colour_discrete</td>
+<td style="text-align: left;">scale_</td>
+<td style="text-align: left;">scale_edge_colour_</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data_filter <span class="ot">&lt;-</span> <span class="cf">function</span>(.keep, .by) {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">structure</span>(<span class="fu">list</span>(<span class="at">keep_specification =</span> rlang<span class="sc">::</span><span class="fu">enquo</span>(.keep), </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">by_specification =</span> rlang<span class="sc">::</span><span class="fu">enquo</span>(.by)), </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">class =</span> <span class="st">"filterobs"</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>ggplot_add.filterobs <span class="ot">&lt;-</span> <span class="cf">function</span>(object, plot, object_name) {</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  new_data <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(plot<span class="sc">$</span>data, </span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                            <span class="sc">!!</span>object<span class="sc">$</span>keep_specification, </span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                            <span class="at">.by =</span> <span class="sc">!!</span>object<span class="sc">$</span>by_specification)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  plot<span class="sc">$</span>data <span class="ot">&lt;-</span> new_data</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  plot</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>ggplot2 allows you build up your plot bit by bit – to write ‘graphical poems’ (Wickham 2010). It is easy to gain insights simply by 1. defining a data set to look at, 2. the aesthetics (x position, y position, color, size, etc) that should represent variables from that data, and 3. what geometric marks should take on those aesthetics. Inspired by this incrementalism, frameworks like camcorder, flipbookr, codehover exist to capture plot composition.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>:::{focus-on="cr-.PLOTXXX"}
-.COMMENT, using `.CODE`
-:::
-
-:::{#cr-.PLOTXXX}
-```{r .PLOTXXX}
-.LEADING
-  .CODE
-```
-:::</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_filter <span class="ot">&lt;-</span> <span class="cf">function</span>(.keep, .by) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">structure</span>(<span class="fu">list</span>(<span class="at">keep_specification =</span> rlang<span class="sc">::</span><span class="fu">enquo</span>(.keep), </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">by_specification =</span> rlang<span class="sc">::</span><span class="fu">enquo</span>(.by)), </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">class =</span> <span class="st">"filterobs"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>ggplot_add.filterobs <span class="ot">&lt;-</span> <span class="cf">function</span>(object, plot, object_name) {</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  new_data <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(plot<span class="sc">$</span>data, </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                            <span class="sc">!!</span>object<span class="sc">$</span>keep_specification, </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                            <span class="at">.by =</span> <span class="sc">!!</span>object<span class="sc">$</span>by_specification)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  plot<span class="sc">$</span>data <span class="ot">&lt;-</span> new_data</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  plot</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cr-section cr-column-screen sidebar-left">
 <div class="narrative-col">
@@ -257,17 +390,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-5">
 <div class="narrative">
-<p>we’ll add a theme, using <code>ggchalkboard:::theme_glassboard()</code></p>
+<p>and lets square up the circles, using <code>coord_equal()</code></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-6">
 <div class="narrative">
-<p>And remove axes… , using <code>theme(axis.line = element_blank(), axis.text = element_blank(), axis.ticks = element_blank())</code></p>
+<p>we’ll add a theme, using <code>ggchalkboard:::theme_glassboard()</code></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-7">
 <div class="narrative">
-<p>and lets square up the circles, using <code>coord_equal()</code></p>
+<p>And remove axes… , using <code>theme(axis.line = element_blank(), axis.text = element_blank(), axis.ticks = element_blank())</code></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-8">
@@ -320,7 +453,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sticky-col-stack">
 <div id="cr-walkthrough-1" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> user_repo_fun) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> user_repo_fun) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -332,8 +465,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-2" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> <span class="st">"All exportedn functions"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> <span class="st">"All exportedn functions"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -345,8 +478,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-3" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    ggcirclepack<span class="sc">::</span><span class="fu">geom_circlepack</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ggcirclepack<span class="sc">::</span><span class="fu">geom_circlepack</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -358,8 +491,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-4" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    ggcirclepack<span class="sc">::</span><span class="fu">geom_circlepack_text</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    ggcirclepack<span class="sc">::</span><span class="fu">geom_circlepack_text</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -371,8 +504,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-5" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    ggchalkboard<span class="sc">:::</span><span class="fu">theme_glassboard</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_equal</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -384,8 +517,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-6" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.line =</span> <span class="fu">element_blank</span>(), <span class="at">axis.text =</span> <span class="fu">element_blank</span>(), <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    ggchalkboard<span class="sc">:::</span><span class="fu">theme_glassboard</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -397,8 +530,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-7" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_equal</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.line =</span> <span class="fu">element_blank</span>(), <span class="at">axis.text =</span> <span class="fu">element_blank</span>(), <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -410,8 +543,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-8" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> repo) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> repo) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -423,8 +556,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-9" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> user) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> user) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -436,8 +569,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-10" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> prefix_short) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> prefix_short) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -449,8 +582,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-11" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> prefix_long) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> prefix_long) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -462,8 +595,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-12" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data_filter</span>(<span class="fu">n</span>() <span class="sc">&gt;</span> <span class="dv">60</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(prefix_long), <span class="at">.by =</span> prefix_long) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data_filter</span>(<span class="fu">n</span>() <span class="sc">&gt;</span> <span class="dv">60</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(prefix_long), <span class="at">.by =</span> prefix_long) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -475,8 +608,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-13" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>prefix_long) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>prefix_long) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -488,8 +621,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-14" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data_filter</span>(prefix_long <span class="sc">!=</span> <span class="st">"gf_"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data_filter</span>(prefix_long <span class="sc">!=</span> <span class="st">"gf_"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -501,8 +634,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-15" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> user) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> user) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -514,8 +647,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-16" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data_filter</span>(<span class="fu">n</span>() <span class="sc">&gt;=</span> <span class="dv">10</span>, <span class="at">.by =</span> <span class="fu">c</span>(user, prefix_long)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data_filter</span>(<span class="fu">n</span>() <span class="sc">&gt;=</span> <span class="dv">10</span>, <span class="at">.by =</span> <span class="fu">c</span>(user, prefix_long)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -529,29 +662,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>()<span class="sc">$</span>plot_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>()<span class="sc">$</span>plot_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>NULL</code></pre>
 </div>
 </div>
-<p>Here is the complete graphical poem!</p>
+<p>Here is the complete ‘conversation’ with the dataset!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> user_repo_fun) <span class="sc">+</span> <span class="co"># the data frame to be plotted is all the exported functions from the </span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> <span class="st">"All exported</span><span class="sc">\n</span><span class="st"> functions"</span>) <span class="sc">+</span> <span class="co"># let's look at a count of all the exported functions first</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  ggcirclepack<span class="sc">::</span><span class="fu">geom_circlepack</span>() <span class="sc">+</span> <span class="co"># Using circlepacking, we automatically have circles size representing the number of observation, i.e. exported functions</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  ggcirclepack<span class="sc">::</span><span class="fu">geom_circlepack_text</span>() <span class="sc">+</span> <span class="co"># Of course this is hard to interpret without some kind of label.  We use geom_circplepack_text to do this for us</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  ggchalkboard<span class="sc">:::</span><span class="fu">theme_glassboard</span>() <span class="sc">+</span> <span class="co"># we'll add a theme</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.line =</span> <span class="fu">element_blank</span>(), <span class="at">axis.text =</span> <span class="fu">element_blank</span>(), <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="co"># And remove axes... </span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span> <span class="co"># and lets square up the circles</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> repo) <span class="sc">+</span> <span class="co"># First we ask what packages - github repository names - are present</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> user) <span class="sc">+</span> <span class="co"># Then let's look at who is writing these exported functions</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> prefix_short) <span class="sc">+</span> <span class="co"># And we can look at what types of functions are exported, by looking at prefixes</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> prefix_long) <span class="sc">+</span> <span class="co"># Disaggregating a little, to longer prefixes like scale_color, we get a more granular look at exported function types</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data_filter</span>(<span class="fu">n</span>() <span class="sc">&gt;</span> <span class="dv">60</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(prefix_long), <span class="at">.by =</span> prefix_long) <span class="sc">+</span> <span class="co"># and we filter more popular prefixes</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>prefix_long) <span class="sc">+</span> <span class="co"># and break up our plot space by these prefixes</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data_filter</span>(prefix_long <span class="sc">!=</span> <span class="st">"gf_"</span>) <span class="sc">+</span> <span class="co">#gf isn't really a in-grammar prefix</span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> user) <span class="sc">+</span> <span class="co"># let's look at top prefixes by user</span></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data_filter</span>(<span class="fu">n</span>() <span class="sc">&gt;=</span> <span class="dv">10</span>, <span class="at">.by =</span> <span class="fu">c</span>(user, prefix_long)) <span class="co"># and look at the prolific authors in each of these areas</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> user_repo_fun) <span class="sc">+</span> <span class="co"># the data frame to be plotted is all the exported functions from the </span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> <span class="st">"All exported</span><span class="sc">\n</span><span class="st"> functions"</span>) <span class="sc">+</span> <span class="co"># let's look at a count of all the exported functions first</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  ggcirclepack<span class="sc">::</span><span class="fu">geom_circlepack</span>() <span class="sc">+</span> <span class="co"># Using circlepacking, we automatically have circles size representing the number of observation, i.e. exported functions</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  ggcirclepack<span class="sc">::</span><span class="fu">geom_circlepack_text</span>() <span class="sc">+</span> <span class="co"># Of course this is hard to interpret without some kind of label.  We use geom_circplepack_text to do this for us</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span> <span class="co"># and lets square up the circles</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  ggchalkboard<span class="sc">:::</span><span class="fu">theme_glassboard</span>() <span class="sc">+</span> <span class="co"># we'll add a theme</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.line =</span> <span class="fu">element_blank</span>(), <span class="at">axis.text =</span> <span class="fu">element_blank</span>(), <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="co"># And remove axes... </span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> repo) <span class="sc">+</span> <span class="co"># First we ask what packages - github repository names - are present</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> user) <span class="sc">+</span> <span class="co"># Then let's look at who is writing these exported functions</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> prefix_short) <span class="sc">+</span> <span class="co"># And we can look at what types of functions are exported, by looking at prefixes</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> prefix_long) <span class="sc">+</span> <span class="co"># Disaggregating a little, to longer prefixes like scale_color, we get a more granular look at exported function types</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data_filter</span>(<span class="fu">n</span>() <span class="sc">&gt;</span> <span class="dv">60</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(prefix_long), <span class="at">.by =</span> prefix_long) <span class="sc">+</span> <span class="co"># and we filter more popular prefixes</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>prefix_long) <span class="sc">+</span> <span class="co"># and break up our plot space by these prefixes</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data_filter</span>(prefix_long <span class="sc">!=</span> <span class="st">"gf_"</span>) <span class="sc">+</span> <span class="co">#gf isn't really a in-grammar prefix</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> user) <span class="sc">+</span> <span class="co"># let's look at top prefixes by user</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data_filter</span>(<span class="fu">n</span>() <span class="sc">&gt;=</span> <span class="dv">10</span>, <span class="at">.by =</span> <span class="fu">c</span>(user, prefix_long)) <span class="co"># and look at the prolific authors in each of these areas</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
