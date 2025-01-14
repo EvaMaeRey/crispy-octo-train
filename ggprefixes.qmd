@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = T, message = F, warning = F)
 ```{r}
 user_repo_fun <- read_csv("https://raw.githubusercontent.com/EvaMaeRey/mytidytuesday/refs/heads/main/2024-11-19-gg-prefixes/exported_funs_exts_ggplot2_tidyverse_org.csv") %>% 
   mutate(prefix_short = fun_exported |> str_extract(".*?_")) %>% 
-  mutate(prefix_long = fun_exported |> str_extract(".+_"))
+  mutate(prefix_long = fun_exported |> str_extract("scale_.*?_|.*?_"))
 
 sample_n(user_repo_fun, 20) |>
   knitr::kable()
@@ -33,6 +33,41 @@ ggplot_add.filterobs <- function(object, plot, object_name) {
                             !!object$keep_specification, 
                             .by = !!object$by_specification)
   plot$data <- new_data
+  plot
+
+}
+
+data_nest <- function(.by) {
+  structure(list(by_specification = rlang::enquo(.by)),
+            class = "data_nestvar")
+  
+}
+
+ggplot_add.data_nestvar <- function(object, plot, object_name) {
+
+  
+  new_data <- tidyr::nest(plot$data, 
+                          .by = !! object$by_specification)
+    
+  plot$data <- new_data
+  plot
+
+}
+
+
+data_unnest <- function(cols) {
+  structure(list(),
+            class = "data_unnestvar")
+  
+}
+
+ggplot_add.data_unnestvar <- function(object, plot, object_name) {
+
+  
+  new_data <- tidyr::unnest(plot$data, cols = "data")
+    
+  plot$data <- new_data
+  
   plot
 
 }
@@ -102,11 +137,17 @@ ggplot(data = user_repo_fun) + # the data frame to be plotted is all the exporte
   theme(axis.line = element_blank(), axis.text = element_blank(), axis.ticks = element_blank()) + # And remove axes... 
   aes(id = repo) + # First we ask what packages - github repository names - are present
   aes(id = user) + # Then let's look at who is writing these exported functions
+  data_nest(.by = user) + # an extender's an extender no matter how small
+  scale_size(range = 1.75) + #shrink sizes
+  data_unnest() + data_nest(.by = c(user, repo)) + # extender by number of repos
+  scale_size() + # back to default size scales
+  data_unnest() + # back to record per extender (user)
   aes(id = prefix_short) + # And we can look at what types of functions are exported, by looking at prefixes
   aes(id = prefix_long) + # Disaggregating a little, to longer prefixes like scale_color, we get a more granular look at exported function types
   data_filter(n() > 60 & !is.na(prefix_long), .by = prefix_long) + # and we filter more popular prefixes
-  facet_wrap(~prefix_long) + # and break up our plot space by these prefixes
-  data_filter(prefix_long != "gf_") + #gf isn't really a in-grammar prefix
+  facet_wrap(~prefix_short) + # and break up our plot space by these prefixes
+  data_filter(prefix_short != "gf_|add_") + #gf isn't really a in-grammar prefix
   aes(id = user) + # let's look at top prefixes by user
-  data_filter(n() >= 10, .by = c(user, prefix_long)) # and look at the prolific authors in each of these areas
+  data_filter(n() >= 10, .by = c(user, prefix_short)) + # and look at the prolific authors in each of these areas
+  data_nest(c(user, prefix_short)) + scale_size(range = 1.7) # and show them equally
 ```
