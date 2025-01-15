@@ -16,7 +16,7 @@ website:
       - href: ggprefixes.qmd
         text: Extension Gallery Functions
       - href: positconfspeakers.qmd
-        text: Posit Conf Speakers
+        text: Posit Conf
 
     tools:
       - icon: github
