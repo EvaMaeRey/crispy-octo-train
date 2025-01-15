@@ -1,0 +1,190 @@
+---
+title: Who are the ggplot2 extenders?
+format: closeread-html
+---
+
+
+```{r, include = F}
+library(tidyverse)
+knitr::opts_chunk$set(echo = T, message = F, warning = F)
+```
+
+
+
+```{r}
+conf2023 <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-01-14/conf2023.csv') |> mutate(year = 2023)
+conf2024 <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-01-14/conf2024.csv') |> mutate(year = 2024)
+
+names(conf2023) 
+names(conf2024)
+
+
+sample_n(conf2023, 20)
+```
+
+```{r}
+data_filter <- function(.keep, .by) {
+  structure(list(keep_specification = rlang::enquo(.keep), 
+                 by_specification = rlang::enquo(.by)), 
+            class = "filterobs")
+}
+
+ggplot_add.filterobs <- function(object, plot, object_name) {
+  
+  new_data <- dplyr::filter(plot$data, 
+                            !!object$keep_specification, 
+                            .by = !!object$by_specification)
+  plot$data <- new_data
+  plot
+
+}
+
+data_nest <- function(.by) {
+  structure(list(by_specification = rlang::enquo(.by)),
+            class = "data_nestvar")
+  
+}
+
+ggplot_add.data_nestvar <- function(object, plot, object_name) {
+
+  
+  new_data <- tidyr::nest(plot$data, 
+                          .by = !! object$by_specification)
+    
+  plot$data <- new_data
+  plot
+
+}
+
+
+data_unnest <- function(cols) {
+  structure(list(),
+            class = "data_unnestvar")
+  
+}
+
+ggplot_add.data_unnestvar <- function(object, plot, object_name) {
+
+  
+  new_data <- tidyr::unnest(plot$data, cols = "data")
+    
+  plot$data <- new_data
+  
+  plot
+
+}
+
+
+#' @export
+data_mutate <- function(.value, .by, var_name) {
+  structure(list(value_specification = rlang::enquo(.value),
+                 by_specification = rlang::enquo(.by),
+                 var_name_specification = var_name),
+            class = "data_mutate")
+  
+}
+
+ggplot_add.data_mutate <- function(object, plot, object_name) {
+
+  
+  new_data <- dplyr::mutate(plot$data, 
+                            .value = !! object$value_specification, 
+                            .by = !! object$by_specification)
+  
+    message("New variable named '.value' created")
+    
+
+    if(object$var_name %in% names(new_data)){
+      
+      new_data[,object$var_name] <- new_data$.value
+      
+      new_data <- new_data %>% select(-.value)
+    }else{
+    names(new_data)[names(new_data) == ".value"] <- object$var_name
+    }
+    
+    
+  plot$data <- new_data
+  plot
+
+}
+
+```
+
+
+
+
+
+
+
+
+
+```{r, echo = F, results='hide'}
+cr_last_plot_construction <- ':::{focus-on="cr-.PLOTXXX"}\n.COMMENT, using `.CODE`\n:::\n\n:::{#cr-.PLOTXXX}\n```{r .PLOTXXX}\n.LEADING\n  .CODE\n```\n:::\n'  
+
+cr_last_plot_construction |> cat()
+```
+
+
+
+```{r, include = F}
+knitr::knit_code$get("walkthrough") |>
+  tibble(code_raw = _) |>
+  mutate(comment = str_extract(code_raw, "#.+$")) |>
+  mutate(comment = str_remove(comment, "#")) |>
+  mutate(code = str_remove(code_raw, "\\+ #.+$|#.+$")) |>
+  mutate(index = row_number()) |>
+  mutate(plot_name = paste("walkthrough", sep = "-", index)) |>
+  mutate(to_cr = cr_last_plot_construction) |>
+  mutate(to_cr = str_replace_all(to_cr, ".PLOTXXX", plot_name)) |>
+  mutate(to_cr = str_replace(to_cr, ".COMMENT", comment)) |>
+  mutate(to_cr = str_replace_all(to_cr, ".CODE", code)) |>
+  mutate(to_cr = str_replace(to_cr, ".LEADING", ifelse(index == 1, "", "last_plot() +"))) |>
+  pull(to_cr) -> 
+to_closeread
+
+to_closeread
+```
+
+
+
+
+
+
+:::{.cr-section}
+
+`r paste(knitr::knit(text = to_closeread, quiet = F), collapse = "\n\n")`
+
+:::
+
+
+```{r}
+last_plot()$plot_data
+```
+
+Here is the complete 'conversation' with the dataset!
+
+```{r walkthrough, echo = T}
+ggplot(data = conf2023) + # the data frame to be plotted is all the exported functions from the 
+  aes(id = "All Speakers") + # let's look at a count of all the exported functions first
+  ggcirclepack::geom_circlepack() + # Using circlepacking we automatically have circles size representing the number of observation, i.e. exported functions
+  ggcirclepack::geom_circlepack_text() + # We need to add a label or things are hard to interpret
+  coord_equal() + # and lets square up the circles
+  ggchalkboard:::theme_glassboard() + # we'll add a theme
+  theme(axis.line = element_blank(), axis.text = element_blank(), axis.ticks = element_blank()) + # And remove axes 
+  aes(id = session_type) + # First we ask what packages - github repository names - are present
+  scale_size(range = c(3.5, 8)) + # size range from defaults 1 to 6 and then we can see last category is keynote
+  aes(id = session_date) + # Then let's look at who is writing these exported functions
+  scale_size(range = 8) + #shrink sizes
+  aes(id = speaker_affiliation) + scale_size() + # Then let's look at who is writing these exported functions
+  aes(fill = str_detect(speaker_affiliation, "Posit")) + # Let's just highlight some of the diversity in names
+  guides(fill = "none") + # and just delete the fill guide - it's pretty obvious what's being highlighted
+  scale_fill_manual(values = c("lightgrey", alpha("midnightblue", .2))) + # switch out fill
+  data_mutate(var_name = "speaker_affiliation", ifelse(str_detect(speaker_affiliation, "Posit"), "Posit, PBC", speaker_affiliation)) + # consolidating
+  aes(id = speaker_name) + # Let's look at repeat speakers just Tom Mock duplicate
+  data_nest(.by = c(speaker_name, speaker_affiliation)) + scale_size(range = 1) + # let's nest the data to one speaker-affiliation
+  aes(id = fct_lump_min(speaker_affiliation, min = 2, other_level = "Other Affiliation")) + scale_size(range = c(1.25, 6)) + # lump affiliations
+  data_unnest() + # Include Toms two talks
+  aes(label = str_wrap(after_stat(id), 12)) + # Wrapping text
+  guides(size = "none")
+```
