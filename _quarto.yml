@@ -17,6 +17,8 @@ website:
         text: Extension Gallery Functions
       - href: positconfspeakers.qmd
         text: Posit Conf
+      - href: ggalluvial.qmd
+        text: ggalluvial
 
     tools:
       - icon: github
