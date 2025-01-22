@@ -22,6 +22,11 @@ names(conf2024)
 sample_n(conf2023, 20)
 ```
 
+
+::: {.callout-tip  collapse="true"}
+
+
+
 ```{r}
 data_filter <- function(.keep, .by) {
   structure(list(keep_specification = rlang::enquo(.keep), 
@@ -112,7 +117,7 @@ ggplot_add.data_mutate <- function(object, plot, object_name) {
 ```
 
 
-
+:::
 
 
 
@@ -153,7 +158,7 @@ to_closeread
 
 :::{.cr-section}
 
-`r paste(knitr::knit(text = to_closeread, quiet = F), collapse = "\n\n")`
+r paste(knitr::knit(text = to_closeread, quiet = F), collapse = "\n\n")`
 
 :::
 
@@ -174,11 +179,10 @@ ggplot(data = conf2023) + # the data frame to be plotted is all the exported fun
   theme(axis.line = element_blank(), axis.text = element_blank(), axis.ticks = element_blank()) + # And remove axes 
   aes(id = session_type) + # First we ask what packages - github repository names - are present
   scale_size(range = c(3.5, 8)) + # size range from defaults 1 to 6 and then we can see last category is keynote
-  aes(id = session_date) + # Then let's look at who is writing these exported functions
-  scale_size(range = 8) + #shrink sizes
+  aes(id = session_date) + scale_size(range = 8) + # Then let's look at who is writing these exported functions
   aes(id = speaker_affiliation) + scale_size() + # Then let's look at who is writing these exported functions
-  aes(fill = str_detect(speaker_affiliation, "Posit")) + # Let's just highlight some of the diversity in names
-  guides(fill = "none") + # and just delete the fill guide - it's pretty obvious what's being highlighted
+  aes(fill = str_detect(speaker_affiliation, "Posit")) + guides(fill = "none") + # Let's just highlight some of the diversity in names
+ # and just delete the fill guide - it's pretty obvious what's being highlighted
   scale_fill_manual(values = c("lightgrey", alpha("midnightblue", .2))) + # switch out fill
   data_mutate(var_name = "speaker_affiliation", ifelse(str_detect(speaker_affiliation, "Posit"), "Posit, PBC", speaker_affiliation)) + # consolidating
   aes(id = speaker_name) + # Let's look at repeat speakers just Tom Mock duplicate

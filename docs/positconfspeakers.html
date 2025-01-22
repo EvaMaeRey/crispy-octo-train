@@ -204,30 +204,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 20 × 10
    speaker_name speaker_affiliation session_type session_title block_track_title
    &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;            
- 1 Albert Rapp  Ulm University      regular      HTML &amp; CSS f… Compelling desig…
- 2 Gordon Shot… Posit               regular      Diversify yo… Data science wit…
- 3 Kaitlin Bus… SharpestMinds       lightning    What I Wish … Lightning talks  
- 4 Vedha Viyash Appsilon            lightning    Shiny Develo… Lightning talks  
- 5 Tom Mock     Posit, PBC          regular      Github Copil… Data science inf…
- 6 Brian Tarran Royal Statistical … regular      From journal… Quarto (1)       
- 7 Jill MacKay  University of Edin… regular      You Can Lead… Teaching data sc…
- 8 Liz Roten    Metropolitan Counc… regular      How to grace… Building effecti…
- 9 Garrick Ade… Posit               regular      epoxy: super… Elevating your r…
-10 Joe Cheng    Posit Software, PBC regular      Running R-Sh… I can't believe …
-11 SherAaron H… The Carpentries     regular      R! You Going… Teaching data sc…
-12 Daniel Wood… Eli Lilly &amp; Company regular      Developing a… Building effecti…
-13 Reiko Okamo… National Research … regular      What an earl… Getting %$!@ don…
-14 Tomasz Kali… Posit Software, PBC regular      Tracking ML … Tidy up your mod…
-15 JP Flores    University of Nort… lightning    the people o… Lightning talks  
-16 Ben Arancib… GSK                 regular      The Need for… Pharma           
-17 Charlotte W… Posit               regular      What's New i… Quarto (1)       
-18 Max Kuhn     posit               regular      Conformal In… Tidy up your mod…
-19 Alexandros … Appsilon            regular      Hitting the … Leave it to the …
-20 Sean Nguyen  S2G Ventures        regular      How You Get … Getting %$!@ don…
+ 1 Tiger Tang   CARFAX              regular      From Concept… Bridging the gap…
+ 2 Patrick Ten… Meadows Mental Hea… regular      The Gonzalez… Building effecti…
+ 3 Camila Saez… Dow, Inc.           lightning    Coding tools… Lightning talks  
+ 4 JP Flores    University of Nort… lightning    the people o… Lightning talks  
+ 5 Maria Grycuk Appsilon            regular      The Power of… Shiny user inter…
+ 6 Joe Roberts  Posit               regular      How I Learne… Managing packages
+ 7 Natalia And… Pfizer              regular      Building a C… Pharma           
+ 8 Mine Cetink… Posit               regular      Reproducible… Quarto (1)       
+ 9 Vedha Viyash Appsilon            lightning    Shiny Develo… Lightning talks  
+10 Jadey Ryan   Washington State D… regular      Custom Quart… Elevating your r…
+11 Erika Tyagi  Urban Institute     regular      Democratizin… End-to-end data …
+12 Gordon Shot… Posit               regular      Diversify yo… Data science wit…
+13 Andrew Patt… Infrastructure Lea… regular      10 solutions… The future is Sh…
+14 Lydia Gibson California State U… regular      How the R fo… Developing your …
+15 Thomas Mich… AXI                 regular      Combining R … R or Python? Why…
+16 Michael Gar… Medable             regular      Integrating … Leave it to the …
+17 Tesla DuBois Fox Chase Cancer C… regular      Solving a Se… Developing your …
+18 James Balam… University of Illi… regular      Dynamic Inte… Quarto (1)       
+19 Elaine McVey Chief               keynote      From Data Co… From Data Confus…
+20 Davis Vaugh… Posit               lightning    dplyr 1.1.0 … Lightning talks  
 # ℹ 5 more variables: session_date &lt;date&gt;, session_start &lt;dttm&gt;,
 #   session_length &lt;dbl&gt;, session_abstract &lt;chr&gt;, year &lt;dbl&gt;</code></pre>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_filter <span class="ot">&lt;-</span> <span class="cf">function</span>(.keep, .by) {</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">structure</span>(<span class="fu">list</span>(<span class="at">keep_specification =</span> rlang<span class="sc">::</span><span class="fu">enquo</span>(.keep), </span>
@@ -315,426 +327,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</div>
+</div>
+</div>
 <div class="cr-section cr-column-screen sidebar-left">
 <div class="narrative-col">
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-1">
-<div class="narrative">
-<p>the data frame to be plotted is all the exported functions from the , using <code>ggplot(data = conf2023)</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-2">
-<div class="narrative">
-<p>let’s look at a count of all the exported functions first, using <code>aes(id = "All Speakers")</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-3">
-<div class="narrative">
-<p>Using circlepacking we automatically have circles size representing the number of observation, i.e.&nbsp;exported functions, using <code>ggcirclepack::geom_circlepack()</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-4">
-<div class="narrative">
-<p>We need to add a label or things are hard to interpret, using <code>ggcirclepack::geom_circlepack_text()</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-5">
-<div class="narrative">
-<p>and lets square up the circles, using <code>coord_equal()</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-6">
-<div class="narrative">
-<p>we’ll add a theme, using <code>ggchalkboard:::theme_glassboard()</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-7">
-<div class="narrative">
-<p>And remove axes , using <code>theme(axis.line = element_blank(), axis.text = element_blank(), axis.ticks = element_blank())</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-8">
-<div class="narrative">
-<p>First we ask what packages - github repository names - are present, using <code>aes(id = session_type)</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-9">
-<div class="narrative">
-<p>size range from defaults 1 to 6 and then we can see last category is keynote, using <code>scale_size(range = c(3.5, 8))</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-10">
-<div class="narrative">
-<p>Then let’s look at who is writing these exported functions, using <code>aes(id = session_date)</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-11">
-<div class="narrative">
-<p>shrink sizes, using <code>scale_size(range = 8)</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-12">
-<div class="narrative">
-<p>Then let’s look at who is writing these exported functions, using <code>aes(id = speaker_affiliation) + scale_size()</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-13">
-<div class="narrative">
-<p>Let’s just highlight some of the diversity in names, using <code>aes(fill = str_detect(speaker_affiliation, "Posit"))</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-14">
-<div class="narrative">
-<p>and just delete the fill guide - it’s pretty obvious what’s being highlighted, using <code>guides(fill = "none")</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-15">
-<div class="narrative">
-<p>switch out fill, using <code>scale_fill_manual(values = c("lightgrey", alpha("midnightblue", .2)))</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-16">
-<div class="narrative">
-<p>consolidating, using <code>data_mutate(var_name = "speaker_affiliation", ifelse(str_detect(speaker_affiliation, "Posit"), "Posit, PBC", speaker_affiliation))</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-17">
-<div class="narrative">
-<p>Let’s look at repeat speakers just Tom Mock duplicate, using <code>aes(id = speaker_name)</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-18">
-<div class="narrative">
-<p>let’s nest the data to one speaker-affiliation, using <code>data_nest(.by = c(speaker_name, speaker_affiliation)) + scale_size(range = 1)</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-19">
-<div class="narrative">
-<p>lump affiliations, using <code>aes(id = fct_lump_min(speaker_affiliation, min = 2, other_level = "Other Affiliation")) + scale_size(range = c(1.25, 6))</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-20">
-<div class="narrative">
-<p>Include Toms two talks, using <code>data_unnest()</code></p>
-</div>
-</div>
-<div class="trigger new-trigger" data-focus-on="cr-walkthrough-21">
-<div class="narrative">
-<p>Wrapping text, using <code>aes(label = str_wrap(after_stat(id), 12))</code></p>
-</div>
-</div>
 <div class="trigger">
 <div class="narrative">
-<p>NA</p>
+<p>r paste(knitr::knit(text = to_closeread, quiet = F), collapse = “”)`</p>
 </div>
 </div>
 </div>
 <div class="sticky-col">
 <div class="sticky-col-stack">
-<div id="cr-walkthrough-1" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> conf2023) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-1-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-2" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> <span class="st">"All Speakers"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-3" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    ggcirclepack<span class="sc">::</span><span class="fu">geom_circlepack</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-3-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-4" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    ggcirclepack<span class="sc">::</span><span class="fu">geom_circlepack_text</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-5" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_equal</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-6" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    ggchalkboard<span class="sc">:::</span><span class="fu">theme_glassboard</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-7" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.line =</span> <span class="fu">element_blank</span>(), <span class="at">axis.text =</span> <span class="fu">element_blank</span>(), <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-8" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> session_type) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-8-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-9" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">3.5</span>, <span class="dv">8</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-9-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-10" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> session_date) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-10-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-11" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="dv">8</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-11-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-12" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> speaker_affiliation) <span class="sc">+</span> <span class="fu">scale_size</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-12-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-13" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">str_detect</span>(speaker_affiliation, <span class="st">"Posit"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-13-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-14" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-14-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-15" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"lightgrey"</span>, <span class="fu">alpha</span>(<span class="st">"midnightblue"</span>, .<span class="dv">2</span>))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-15-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-16" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data_mutate</span>(<span class="at">var_name =</span> <span class="st">"speaker_affiliation"</span>, <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(speaker_affiliation, <span class="st">"Posit"</span>), <span class="st">"Posit, PBC"</span>, speaker_affiliation)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-16-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-17" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> speaker_name) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-17-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-18" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data_nest</span>(<span class="at">.by =</span> <span class="fu">c</span>(speaker_name, speaker_affiliation)) <span class="sc">+</span> <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-18-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-19" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">id =</span> <span class="fu">fct_lump_min</span>(speaker_affiliation, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">other_level =</span> <span class="st">"Other Affiliation"</span>)) <span class="sc">+</span> <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">1.25</span>, <span class="dv">6</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-19-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-20" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data_unnest</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-20-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="cr-walkthrough-21" class="sticky">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">str_wrap</span>(<span class="fu">after_stat</span>(id), <span class="dv">12</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="positconfspeakers_files/figure-html/walkthrough-21-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
+
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>()<span class="sc">$</span>plot_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>()<span class="sc">$</span>plot_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>NULL</code></pre>
 </div>
 </div>
 <p>Here is the complete ‘conversation’ with the dataset!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> conf2023) <span class="sc">+</span> <span class="co"># the data frame to be plotted is all the exported functions from the </span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> <span class="st">"All Speakers"</span>) <span class="sc">+</span> <span class="co"># let's look at a count of all the exported functions first</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  ggcirclepack<span class="sc">::</span><span class="fu">geom_circlepack</span>() <span class="sc">+</span> <span class="co"># Using circlepacking we automatically have circles size representing the number of observation, i.e. exported functions</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  ggcirclepack<span class="sc">::</span><span class="fu">geom_circlepack_text</span>() <span class="sc">+</span> <span class="co"># We need to add a label or things are hard to interpret</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span> <span class="co"># and lets square up the circles</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  ggchalkboard<span class="sc">:::</span><span class="fu">theme_glassboard</span>() <span class="sc">+</span> <span class="co"># we'll add a theme</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.line =</span> <span class="fu">element_blank</span>(), <span class="at">axis.text =</span> <span class="fu">element_blank</span>(), <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="co"># And remove axes </span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> session_type) <span class="sc">+</span> <span class="co"># First we ask what packages - github repository names - are present</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">3.5</span>, <span class="dv">8</span>)) <span class="sc">+</span> <span class="co"># size range from defaults 1 to 6 and then we can see last category is keynote</span></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> session_date) <span class="sc">+</span> <span class="co"># Then let's look at who is writing these exported functions</span></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="dv">8</span>) <span class="sc">+</span> <span class="co">#shrink sizes</span></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> speaker_affiliation) <span class="sc">+</span> <span class="fu">scale_size</span>() <span class="sc">+</span> <span class="co"># Then let's look at who is writing these exported functions</span></span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">str_detect</span>(speaker_affiliation, <span class="st">"Posit"</span>)) <span class="sc">+</span> <span class="co"># Let's just highlight some of the diversity in names</span></span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span> <span class="co"># and just delete the fill guide - it's pretty obvious what's being highlighted</span></span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"lightgrey"</span>, <span class="fu">alpha</span>(<span class="st">"midnightblue"</span>, .<span class="dv">2</span>))) <span class="sc">+</span> <span class="co"># switch out fill</span></span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data_mutate</span>(<span class="at">var_name =</span> <span class="st">"speaker_affiliation"</span>, <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(speaker_affiliation, <span class="st">"Posit"</span>), <span class="st">"Posit, PBC"</span>, speaker_affiliation)) <span class="sc">+</span> <span class="co"># consolidating</span></span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> speaker_name) <span class="sc">+</span> <span class="co"># Let's look at repeat speakers just Tom Mock duplicate</span></span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data_nest</span>(<span class="at">.by =</span> <span class="fu">c</span>(speaker_name, speaker_affiliation)) <span class="sc">+</span> <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># let's nest the data to one speaker-affiliation</span></span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> <span class="fu">fct_lump_min</span>(speaker_affiliation, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">other_level =</span> <span class="st">"Other Affiliation"</span>)) <span class="sc">+</span> <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">1.25</span>, <span class="dv">6</span>)) <span class="sc">+</span> <span class="co"># lump affiliations</span></span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data_unnest</span>() <span class="sc">+</span> <span class="co"># Include Toms two talks</span></span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">str_wrap</span>(<span class="fu">after_stat</span>(id), <span class="dv">12</span>)) <span class="sc">+</span> <span class="co"># Wrapping text</span></span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">size =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> conf2023) <span class="sc">+</span> <span class="co"># the data frame to be plotted is all the exported functions from the </span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> <span class="st">"All Speakers"</span>) <span class="sc">+</span> <span class="co"># let's look at a count of all the exported functions first</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  ggcirclepack<span class="sc">::</span><span class="fu">geom_circlepack</span>() <span class="sc">+</span> <span class="co"># Using circlepacking we automatically have circles size representing the number of observation, i.e. exported functions</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  ggcirclepack<span class="sc">::</span><span class="fu">geom_circlepack_text</span>() <span class="sc">+</span> <span class="co"># We need to add a label or things are hard to interpret</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span> <span class="co"># and lets square up the circles</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  ggchalkboard<span class="sc">:::</span><span class="fu">theme_glassboard</span>() <span class="sc">+</span> <span class="co"># we'll add a theme</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.line =</span> <span class="fu">element_blank</span>(), <span class="at">axis.text =</span> <span class="fu">element_blank</span>(), <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="co"># And remove axes </span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> session_type) <span class="sc">+</span> <span class="co"># First we ask what packages - github repository names - are present</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">3.5</span>, <span class="dv">8</span>)) <span class="sc">+</span> <span class="co"># size range from defaults 1 to 6 and then we can see last category is keynote</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> session_date) <span class="sc">+</span> <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="dv">8</span>) <span class="sc">+</span> <span class="co"># Then let's look at who is writing these exported functions</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> speaker_affiliation) <span class="sc">+</span> <span class="fu">scale_size</span>() <span class="sc">+</span> <span class="co"># Then let's look at who is writing these exported functions</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">str_detect</span>(speaker_affiliation, <span class="st">"Posit"</span>)) <span class="sc">+</span> <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span> <span class="co"># Let's just highlight some of the diversity in names</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a> <span class="co"># and just delete the fill guide - it's pretty obvious what's being highlighted</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"lightgrey"</span>, <span class="fu">alpha</span>(<span class="st">"midnightblue"</span>, .<span class="dv">2</span>))) <span class="sc">+</span> <span class="co"># switch out fill</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data_mutate</span>(<span class="at">var_name =</span> <span class="st">"speaker_affiliation"</span>, <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(speaker_affiliation, <span class="st">"Posit"</span>), <span class="st">"Posit, PBC"</span>, speaker_affiliation)) <span class="sc">+</span> <span class="co"># consolidating</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> speaker_name) <span class="sc">+</span> <span class="co"># Let's look at repeat speakers just Tom Mock duplicate</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data_nest</span>(<span class="at">.by =</span> <span class="fu">c</span>(speaker_name, speaker_affiliation)) <span class="sc">+</span> <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># let's nest the data to one speaker-affiliation</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">id =</span> <span class="fu">fct_lump_min</span>(speaker_affiliation, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">other_level =</span> <span class="st">"Other Affiliation"</span>)) <span class="sc">+</span> <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">1.25</span>, <span class="dv">6</span>)) <span class="sc">+</span> <span class="co"># lump affiliations</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data_unnest</span>() <span class="sc">+</span> <span class="co"># Include Toms two talks</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">str_wrap</span>(<span class="fu">after_stat</span>(id), <span class="dv">12</span>)) <span class="sc">+</span> <span class="co"># Wrapping text</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">size =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

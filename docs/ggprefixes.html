@@ -139,6 +139,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link active" href="./ggprefixes.html" aria-current="page"> 
 <span class="menu-text">Extension Gallery Functions</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./positconfspeakers.html"> 
+<span class="menu-text">Posit Conf</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -181,19 +185,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>user_repo_fun <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/EvaMaeRey/mytidytuesday/refs/heads/main/2024-11-19-gg-prefixes/exported_funs_exts_ggplot2_tidyverse_org.csv"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prefix_short =</span> fun_exported <span class="sc">|&gt;</span> <span class="fu">str_extract</span>(<span class="st">".*?_"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prefix_long =</span> fun_exported <span class="sc">|&gt;</span> <span class="fu">str_extract</span>(<span class="st">"scale_.*?_|.*?_"</span>))</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_n</span>(user_repo_fun, <span class="dv">20</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prefix_short =</span> fun_exported <span class="sc">|&gt;</span> <span class="fu">str_extract</span>(<span class="st">".*?_"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prefix_long =</span> fun_exported <span class="sc">|&gt;</span> <span class="fu">str_extract</span>(<span class="st">"scale_.*?_|.*?_"</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># user_repo_fun$user |&gt; unique() %&gt;% paste0("@", ., " ") |&gt; cat()</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_n</span>(user_repo_fun, <span class="dv">20</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 17%">
+<col style="width: 16%">
 <col style="width: 12%">
-<col style="width: 37%">
-<col style="width: 14%">
-<col style="width: 17%">
+<col style="width: 39%">
+<col style="width: 15%">
+<col style="width: 16%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -206,144 +214,144 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">jbengler</td>
-<td style="text-align: left;">tidyplots</td>
-<td style="text-align: left;">colors_continuous_bluepinkyellow</td>
-<td style="text-align: left;">colors_</td>
-<td style="text-align: left;">colors_</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">LCBC-UiO</td>
 <td style="text-align: left;">ggseg</td>
 <td style="text-align: left;">reposition_brain</td>
 <td style="text-align: left;">reposition_</td>
 <td style="text-align: left;">reposition_</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">mjskay</td>
-<td style="text-align: left;">ggdist</td>
-<td style="text-align: left;">qlkjcorr_marginal</td>
-<td style="text-align: left;">qlkjcorr_</td>
-<td style="text-align: left;">qlkjcorr_</td>
-</tr>
 <tr class="even">
-<td style="text-align: left;">trevorld</td>
-<td style="text-align: left;">ggpattern</td>
-<td style="text-align: left;">scale_pattern_color_manual</td>
+<td style="text-align: left;">hrbrmstr</td>
+<td style="text-align: left;">hrbrthemes</td>
+<td style="text-align: left;">modern_geom_defaults</td>
+<td style="text-align: left;">modern_</td>
+<td style="text-align: left;">modern_</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">davidgohel</td>
+<td style="text-align: left;">ggiraph</td>
+<td style="text-align: left;">scale_color_gradient2_interactive</td>
 <td style="text-align: left;">scale_</td>
-<td style="text-align: left;">scale_pattern_</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ggobi</td>
-<td style="text-align: left;">ggally</td>
-<td style="text-align: left;">ggally_cor_v1_5</td>
-<td style="text-align: left;">ggally_</td>
-<td style="text-align: left;">ggally_</td>
+<td style="text-align: left;">scale_color_</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">jtlandis</td>
+<td style="text-align: left;">ggside</td>
+<td style="text-align: left;">scale_ycolor_manual</td>
+<td style="text-align: left;">scale_</td>
+<td style="text-align: left;">scale_ycolor_</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">clauswilke</td>
+<td style="text-align: left;">ggridges</td>
+<td style="text-align: left;">scale_vline_width_continuous</td>
+<td style="text-align: left;">scale_</td>
+<td style="text-align: left;">scale_vline_</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">davidgohel</td>
+<td style="text-align: left;">ggiraph</td>
+<td style="text-align: left;">interactive_raster_grob</td>
+<td style="text-align: left;">interactive_</td>
+<td style="text-align: left;">interactive_</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">thomasp85</td>
+<td style="text-align: left;">ggfx</td>
+<td style="text-align: left;">mask_raster</td>
+<td style="text-align: left;">mask_</td>
+<td style="text-align: left;">mask_</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">piecepackr</td>
+<td style="text-align: left;">piecepackr</td>
+<td style="text-align: left;">has_font</td>
+<td style="text-align: left;">has_</td>
+<td style="text-align: left;">has_</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">dieghernan</td>
 <td style="text-align: left;">tidyterra</td>
-<td style="text-align: left;">glimpse</td>
+<td style="text-align: left;">scale_fill_hypso_tint_c</td>
+<td style="text-align: left;">scale_</td>
+<td style="text-align: left;">scale_fill_</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ProjectMOSAIC</td>
+<td style="text-align: left;">ggformula</td>
+<td style="text-align: left;">gf_sina</td>
+<td style="text-align: left;">gf_</td>
+<td style="text-align: left;">gf_</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">terrytangyuan</td>
+<td style="text-align: left;">autoplotly</td>
+<td style="text-align: left;">“%&gt;%”</td>
 <td style="text-align: left;">NA</td>
 <td style="text-align: left;">NA</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">larmarange</td>
-<td style="text-align: left;">ggstats</td>
-<td style="text-align: left;">ggcoef_multinom</td>
-<td style="text-align: left;">ggcoef_</td>
-<td style="text-align: left;">ggcoef_</td>
-</tr>
 <tr class="even">
-<td style="text-align: left;">thomasp85</td>
-<td style="text-align: left;">ggforce</td>
-<td style="text-align: left;">geom_shape</td>
-<td style="text-align: left;">geom_</td>
-<td style="text-align: left;">geom_</td>
+<td style="text-align: left;">ProjectMOSAIC</td>
+<td style="text-align: left;">ggformula</td>
+<td style="text-align: left;">gf_pointrange</td>
+<td style="text-align: left;">gf_</td>
+<td style="text-align: left;">gf_</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">aphalo</td>
-<td style="text-align: left;">ggpp</td>
-<td style="text-align: left;">stat_dens1d_filter</td>
-<td style="text-align: left;">stat_</td>
-<td style="text-align: left;">stat_</td>
+<td style="text-align: left;">davidgohel</td>
+<td style="text-align: left;">ggiraph</td>
+<td style="text-align: left;">opts_hover</td>
+<td style="text-align: left;">opts_</td>
+<td style="text-align: left;">opts_</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Ryo-N7</td>
-<td style="text-align: left;">tvthemes</td>
-<td style="text-align: left;">theme_hildaDay</td>
-<td style="text-align: left;">theme_</td>
-<td style="text-align: left;">theme_</td>
+<td style="text-align: left;">shikokuchuo</td>
+<td style="text-align: left;">ichimoku</td>
+<td style="text-align: left;">oanda_studio</td>
+<td style="text-align: left;">oanda_</td>
+<td style="text-align: left;">oanda_</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">dieghernan</td>
+<td style="text-align: left;">tidyterra</td>
+<td style="text-align: left;">left_join</td>
+<td style="text-align: left;">left_</td>
+<td style="text-align: left;">left_</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sachsmc</td>
+<td style="text-align: left;">plotROC</td>
+<td style="text-align: left;">direct_label</td>
+<td style="text-align: left;">direct_</td>
+<td style="text-align: left;">direct_</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">hrbrmstr</td>
+<td style="text-align: left;">hrbrthemes</td>
+<td style="text-align: left;">ft_text_col</td>
+<td style="text-align: left;">ft_</td>
+<td style="text-align: left;">ft_</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">davidhodge931</td>
+<td style="text-align: left;">ggblanket</td>
+<td style="text-align: left;">navy</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ProjectMOSAIC</td>
 <td style="text-align: left;">ggformula</td>
-<td style="text-align: left;">gf_density_ridges2</td>
+<td style="text-align: left;">gf_facet_wrap</td>
 <td style="text-align: left;">gf_</td>
 <td style="text-align: left;">gf_</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">teunbrand</td>
-<td style="text-align: left;">legendry</td>
-<td style="text-align: left;">bracket_chevron</td>
-<td style="text-align: left;">bracket_</td>
-<td style="text-align: left;">bracket_</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Yunuuuu</td>
-<td style="text-align: left;">ggalign</td>
-<td style="text-align: left;">fortify_data_frame</td>
-<td style="text-align: left;">fortify_</td>
-<td style="text-align: left;">fortify_</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">malcolmbarrett</td>
-<td style="text-align: left;">ggdag</td>
-<td style="text-align: left;">geom_dag</td>
-<td style="text-align: left;">geom_</td>
-<td style="text-align: left;">geom_</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">road2stat</td>
-<td style="text-align: left;">ggsci</td>
-<td style="text-align: left;">pal_igv</td>
-<td style="text-align: left;">pal_</td>
-<td style="text-align: left;">pal_</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">clauswilke</td>
-<td style="text-align: left;">ggridges</td>
-<td style="text-align: left;">GeomVRidgeline</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">dieghernan</td>
-<td style="text-align: left;">tidyterra</td>
-<td style="text-align: left;">scale_colour_wiki_b</td>
+<td style="text-align: left;">thomasp85</td>
+<td style="text-align: left;">ggraph</td>
+<td style="text-align: left;">scale_edge_fill_fermenter</td>
 <td style="text-align: left;">scale_</td>
-<td style="text-align: left;">scale_colour_</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">LCBC-UiO</td>
-<td style="text-align: left;">ggseg</td>
-<td style="text-align: left;">brain_atlas</td>
-<td style="text-align: left;">brain_</td>
-<td style="text-align: left;">brain_</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">corybrunson</td>
-<td style="text-align: left;">ggalluvial</td>
-<td style="text-align: left;">lode_frontback</td>
-<td style="text-align: left;">lode_</td>
-<td style="text-align: left;">lode_</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">aphalo</td>
-<td style="text-align: left;">ggspectra</td>
-<td style="text-align: left;">scale_y_s.q.response_continuous</td>
-<td style="text-align: left;">scale_</td>
-<td style="text-align: left;">scale_y_</td>
+<td style="text-align: left;">scale_edge_</td>
 </tr>
 </tbody>
 </table>

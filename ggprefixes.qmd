@@ -13,8 +13,12 @@ knitr::opts_chunk$set(echo = T, message = F, warning = F)
 
 ```{r}
 user_repo_fun <- read_csv("https://raw.githubusercontent.com/EvaMaeRey/mytidytuesday/refs/heads/main/2024-11-19-gg-prefixes/exported_funs_exts_ggplot2_tidyverse_org.csv") %>% 
+
+  
   mutate(prefix_short = fun_exported |> str_extract(".*?_")) %>% 
   mutate(prefix_long = fun_exported |> str_extract("scale_.*?_|.*?_"))
+
+# user_repo_fun$user |> unique() %>% paste0("@", ., " ") |> cat()
 
 sample_n(user_repo_fun, 20) |>
   knitr::kable()
