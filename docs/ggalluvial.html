@@ -212,10 +212,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>StatStratum<span class="sc">$</span>default_aes <span class="ot">&lt;-</span> <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">after_stat</span>(stratum))</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>geom_stratum_text <span class="ot">&lt;-</span> <span class="cf">function</span>(...){<span class="fu">geom_text</span>(<span class="at">stat =</span> <span class="st">"stratum"</span>, ...)}</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>geom_stratum_text <span class="ot">&lt;-</span> <span class="cf">function</span>(...){<span class="fu">geom_text</span>(<span class="at">stat =</span> StatStratum, ...)}</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>GeomStratum<span class="sc">$</span>default_aes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>GeomStratum<span class="sc">$</span>default_aes <span class="co"># hardcoded</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Aesthetic mapping: 
 * `size`      -&gt; 0.5
@@ -225,18 +224,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 * `fill`      -&gt; "white"
 * `alpha`     -&gt; 1</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>GeomRect<span class="sc">$</span>default_aes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Aesthetic mapping: 
+* `colour`    -&gt; NA
+* `fill`      -&gt; `from_theme(col_mix(ink, paper, 0.35))`
+* `linewidth` -&gt; `from_theme(borderwidth)`
+* `linetype`  -&gt; `from_theme(bordertype)`
+* `alpha`     -&gt; NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>GeomStratum<span class="sc">$</span>default_aes <span class="ot">&lt;-</span> GeomRect<span class="sc">$</span>default_aes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here is a graphical poem!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> titanic_wide) <span class="sc">+</span> <span class="co"># Ok Lets look at this titanic data</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> Freq, <span class="at">axis1 =</span> Class, <span class="at">axis2 =</span> Survived) <span class="sc">+</span> <span class="co"># Here some variables of interest</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_alluvium</span>() <span class="sc">+</span> <span class="co"># And we are ready to look at flow</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_stratum</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="cn">NULL</span>)) <span class="sc">+</span> <span class="co"># And we can label our stratumaxes</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_stratum_text</span>() <span class="sc">+</span> <span class="co"># Add stratum labels</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">axis1 =</span> Sex) <span class="sc">+</span> <span class="co"># look at sex to survival</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">axis1 =</span> Age) <span class="sc">+</span> <span class="co"># look at age to survival</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">axis2 =</span> Class, <span class="at">axis3 =</span> Survived) <span class="sc">+</span> <span class="co"># age to class to survival</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">axis1 =</span> Sex, <span class="at">axis2 =</span> Age, <span class="at">axis3 =</span> Class, <span class="at">axis4 =</span> Survived) <span class="co"># a train</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> titanic_wide) <span class="sc">+</span> <span class="co"># Ok Lets look at this titanic data</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> Freq, <span class="at">axis1 =</span> Class, <span class="at">axis2 =</span> Survived) <span class="sc">+</span> <span class="co"># Here some variables of interest</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  ggchalkboard<span class="sc">::</span><span class="fu">theme_chalkboard</span>(<span class="at">base_size =</span> <span class="dv">18</span>) <span class="sc">+</span> <span class="co"># in a alluvial plot first look</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_alluvium</span>() <span class="sc">+</span> <span class="co"># And we are ready to look at flow</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_stratum</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="cn">NULL</span>)) <span class="sc">+</span> <span class="co"># And we can label our stratumaxes</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">I</span>(<span class="fu">alpha</span>(<span class="st">"lightyellow"</span>, .<span class="dv">5</span>))) <span class="sc">+</span> <span class="co"># the stratum at least really needs outlines, and not intent, but I also didn't mind alluvium outlines, however there are more outlines that I anticipated</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_stratum_text</span>() <span class="sc">+</span> <span class="co"># Add stratum labels</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">axis1 =</span> Sex) <span class="sc">+</span> <span class="co"># look at sex to survival</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">axis1 =</span> Age) <span class="sc">+</span> <span class="co"># look at age to survival</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">axis2 =</span> Class, <span class="at">axis3 =</span> Survived) <span class="sc">+</span> <span class="co"># age to class to survival</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">axis1 =</span> Sex, <span class="at">axis2 =</span> Age, <span class="at">axis3 =</span> Class, <span class="at">axis4 =</span> Survived) <span class="sc">+</span> <span class="co"># a train</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">fill =</span> Sex) <span class="sc">+</span> <span class="co"># Track sex throughout</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span> <span class="co"># remove fill guide as axis1 is labeled</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"Sex"</span>, <span class="st">"Age"</span>, <span class="st">"Class"</span>, <span class="st">"Survived"</span>), <span class="at">expand =</span> <span class="fu">c</span>(.<span class="dv">1</span>, .<span class="dv">1</span>)) <span class="sc">+</span> <span class="co"># adjusting the x axis</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Demographic"</span>) <span class="sc">+</span> <span class="co"># An overall label for x axis</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">"Passengers on the maiden voyage of the Titanic"</span>) <span class="co"># adding a caption </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -244,20 +260,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">fill =</span> Sex) <span class="sc">+</span> <span class="co"># Track sex throughout</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"Sex"</span>, <span class="st">"Age"</span>, <span class="st">"Class"</span>, <span class="st">"Survived"</span>), <span class="at">expand =</span> <span class="fu">c</span>(.<span class="dv">05</span>, .<span class="dv">05</span>)) <span class="sc">+</span> <span class="co"># adjusting the x axis</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Demographic"</span>) <span class="sc">+</span> <span class="co"># An overall label for x axis</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Passengers on the maiden voyage of the Titanic"</span>) <span class="sc">+</span> <span class="co"># hello </span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"stratified by demographics and survival"</span>) <span class="co"># hello</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>NULL</code></pre>
-</div>
 </div>
 <p>Closeread helps walk people through and digest ideas suggesting a synergy with the gg world. With Closereads, maybe we can read this graphical poem ‘aloud’, and reflect on it a bit in plain language as we go. Here is a generic way to write out what <code>closereads</code> requires for creating plot output and referring to it.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cr_last_plot_construction <span class="ot">&lt;-</span> <span class="st">':::{focus-on="cr-.PLOTXXX"}</span><span class="sc">\n</span><span class="st">.COMMENT, using `.CODE`</span><span class="sc">\n</span><span class="st">:::</span><span class="sc">\n\n</span><span class="st">:::{#cr-.PLOTXXX}</span><span class="sc">\n</span><span class="st">```{r .PLOTXXX}</span><span class="sc">\n</span><span class="st">.LEADING</span><span class="sc">\n</span><span class="st">  .CODE</span><span class="sc">\n</span><span class="st">```</span><span class="sc">\n</span><span class="st">:::</span><span class="sc">\n</span><span class="st">'</span>  </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>cr_last_plot_construction <span class="sc">|&gt;</span> <span class="fu">cat</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>cr_last_plot_construction <span class="ot">&lt;-</span> <span class="st">':::{focus-on="cr-.PLOTXXX"}</span><span class="sc">\n</span><span class="st">.COMMENT, using `.CODE`</span><span class="sc">\n</span><span class="st">:::</span><span class="sc">\n\n</span><span class="st">:::{#cr-.PLOTXXX}</span><span class="sc">\n</span><span class="st">```{r .PLOTXXX}</span><span class="sc">\n</span><span class="st">.LEADING</span><span class="sc">\n</span><span class="st">  .CODE</span><span class="sc">\n</span><span class="st">```</span><span class="sc">\n</span><span class="st">:::</span><span class="sc">\n</span><span class="st">'</span>  </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>cr_last_plot_construction <span class="sc">|&gt;</span> <span class="fu">cat</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>:::{focus-on="cr-.PLOTXXX"}
 .COMMENT, using `.CODE`
@@ -273,37 +281,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Then we can look at our complete ‘graphical poem’, parse it, choreograph a line by line reveal - thanks Garrick and Emi for showing the way using powerful knitr::knit_code$get in Xaringan context! https://emitanaka.rbind.io/post/knitr-knitr-code/ At this point we aren’t being really careful with code parsing or replacement; flipbookr internals has some nicer parsing that might be useable and allow more incremental reveals in other contexts like datamanipulation and table creation. In contrast to the full reiterated code that we show in flipbookr w/ Xaringan w/ plot, we’ll use <code>last_plot() + new_code()</code> below. It just feels like a better fit.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>knit_code<span class="sc">$</span><span class="fu">get</span>(<span class="st">"walkthrough"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">code_raw =</span> _) <span class="sc">|&gt;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">comment =</span> <span class="fu">str_extract</span>(code_raw, <span class="st">"#.+$"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">comment =</span> <span class="fu">str_remove</span>(comment, <span class="st">"#"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">code =</span> <span class="fu">str_remove</span>(code_raw, <span class="st">"</span><span class="sc">\\</span><span class="st">+ #.+$|#.+$"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">index =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plot_name =</span> <span class="fu">paste</span>(<span class="st">"walkthrough"</span>, <span class="at">sep =</span> <span class="st">"-"</span>, index)) <span class="sc">|&gt;</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">to_cr =</span> cr_last_plot_construction) <span class="sc">|&gt;</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">to_cr =</span> <span class="fu">str_replace_all</span>(to_cr, <span class="st">".PLOTXXX"</span>, plot_name)) <span class="sc">|&gt;</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">to_cr =</span> <span class="fu">str_replace</span>(to_cr, <span class="st">".COMMENT"</span>, comment)) <span class="sc">|&gt;</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">to_cr =</span> <span class="fu">str_replace_all</span>(to_cr, <span class="st">".CODE"</span>, code)) <span class="sc">|&gt;</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">to_cr =</span> <span class="fu">str_replace</span>(to_cr, <span class="st">".LEADING"</span>, <span class="fu">ifelse</span>(index <span class="sc">==</span> <span class="dv">1</span>, <span class="st">""</span>, <span class="st">"last_plot() +"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(to_cr) <span class="ot">-&gt;</span> </span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>to_closeread</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>to_closeread</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>knit_code<span class="sc">$</span><span class="fu">get</span>(<span class="st">"walkthrough"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">code_raw =</span> _) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">comment =</span> <span class="fu">str_extract</span>(code_raw, <span class="st">"#.+$"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">comment =</span> <span class="fu">str_remove</span>(comment, <span class="st">"#"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">code =</span> <span class="fu">str_remove</span>(code_raw, <span class="st">"</span><span class="sc">\\</span><span class="st">+ #.+$|#.+$"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">index =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plot_name =</span> <span class="fu">paste</span>(<span class="st">"walkthrough"</span>, <span class="at">sep =</span> <span class="st">"-"</span>, index)) <span class="sc">|&gt;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">to_cr =</span> cr_last_plot_construction) <span class="sc">|&gt;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">to_cr =</span> <span class="fu">str_replace_all</span>(to_cr, <span class="st">".PLOTXXX"</span>, plot_name)) <span class="sc">|&gt;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">to_cr =</span> <span class="fu">str_replace</span>(to_cr, <span class="st">".COMMENT"</span>, comment)) <span class="sc">|&gt;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">to_cr =</span> <span class="fu">str_replace_all</span>(to_cr, <span class="st">".CODE"</span>, code)) <span class="sc">|&gt;</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">to_cr =</span> <span class="fu">str_replace</span>(to_cr, <span class="st">".LEADING"</span>, <span class="fu">ifelse</span>(index <span class="sc">==</span> <span class="dv">1</span>, <span class="st">""</span>, <span class="st">"last_plot() +"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(to_cr) <span class="ot">-&gt;</span> </span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>to_closeread</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>to_closeread</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] ":::{focus-on=\"cr-walkthrough-1\"}\n Ok Lets look at this titanic data, using `ggplot(data = titanic_wide) `\n:::\n\n:::{#cr-walkthrough-1}\n```{r walkthrough-1}\n\n  ggplot(data = titanic_wide) \n```\n:::\n"                                                                                                                                           
- [2] ":::{focus-on=\"cr-walkthrough-2\"}\n Here some variables of interest, using `  aes(y = Freq, axis1 = Class, axis2 = Survived) `\n:::\n\n:::{#cr-walkthrough-2}\n```{r walkthrough-2}\nlast_plot() +\n    aes(y = Freq, axis1 = Class, axis2 = Survived) \n```\n:::\n"                                                                                      
- [3] ":::{focus-on=\"cr-walkthrough-3\"}\n And we are ready to look at flow, using `  geom_alluvium() `\n:::\n\n:::{#cr-walkthrough-3}\n```{r walkthrough-3}\nlast_plot() +\n    geom_alluvium() \n```\n:::\n"                                                                                                                                                   
- [4] ":::{focus-on=\"cr-walkthrough-4\"}\n And we can label our stratumaxes, using `  geom_stratum(aes(fill = NULL)) `\n:::\n\n:::{#cr-walkthrough-4}\n```{r walkthrough-4}\nlast_plot() +\n    geom_stratum(aes(fill = NULL)) \n```\n:::\n"                                                                                                                     
- [5] ":::{focus-on=\"cr-walkthrough-5\"}\n Add stratum labels, using `  geom_stratum_text() `\n:::\n\n:::{#cr-walkthrough-5}\n```{r walkthrough-5}\nlast_plot() +\n    geom_stratum_text() \n```\n:::\n"                                                                                                                                                         
- [6] ":::{focus-on=\"cr-walkthrough-6\"}\n look at sex to survival, using `  aes(axis1 = Sex) `\n:::\n\n:::{#cr-walkthrough-6}\n```{r walkthrough-6}\nlast_plot() +\n    aes(axis1 = Sex) \n```\n:::\n"                                                                                                                                                          
- [7] ":::{focus-on=\"cr-walkthrough-7\"}\n look at age to survival, using `  aes(axis1 = Age) `\n:::\n\n:::{#cr-walkthrough-7}\n```{r walkthrough-7}\nlast_plot() +\n    aes(axis1 = Age) \n```\n:::\n"                                                                                                                                                          
- [8] ":::{focus-on=\"cr-walkthrough-8\"}\n age to class to survival, using `  aes(axis2 = Class, axis3 = Survived) `\n:::\n\n:::{#cr-walkthrough-8}\n```{r walkthrough-8}\nlast_plot() +\n    aes(axis2 = Class, axis3 = Survived) \n```\n:::\n"                                                                                                                 
- [9] ":::{focus-on=\"cr-walkthrough-9\"}\n a train, using `  aes(axis1 = Sex, axis2 = Age, axis3 = Class, axis4 = Survived) `\n:::\n\n:::{#cr-walkthrough-9}\n```{r walkthrough-9}\nlast_plot() +\n    aes(axis1 = Sex, axis2 = Age, axis3 = Class, axis4 = Survived) \n```\n:::\n"                                                                              
-[10] ":::{focus-on=\"cr-walkthrough-10\"}\n Track sex throughout, using `  aes(fill = Sex) `\n:::\n\n:::{#cr-walkthrough-10}\n```{r walkthrough-10}\nlast_plot() +\n    aes(fill = Sex) \n```\n:::\n"                                                                                                                                                            
-[11] ":::{focus-on=\"cr-walkthrough-11\"}\n adjusting the x axis, using `  scale_x_discrete(limits = c(\"Sex\", \"Age\", \"Class\", \"Survived\"), expand = c(.05, .05)) `\n:::\n\n:::{#cr-walkthrough-11}\n```{r walkthrough-11}\nlast_plot() +\n    scale_x_discrete(limits = c(\"Sex\", \"Age\", \"Class\", \"Survived\"), expand = c(.05, .05)) \n```\n:::\n"
-[12] ":::{focus-on=\"cr-walkthrough-12\"}\n An overall label for x axis, using `  labs(x = \"Demographic\") `\n:::\n\n:::{#cr-walkthrough-12}\n```{r walkthrough-12}\nlast_plot() +\n    labs(x = \"Demographic\") \n```\n:::\n"                                                                                                                                 
-[13] ":::{focus-on=\"cr-walkthrough-13\"}\n hello , using `  labs(title = \"Passengers on the maiden voyage of the Titanic\") `\n:::\n\n:::{#cr-walkthrough-13}\n```{r walkthrough-13}\nlast_plot() +\n    labs(title = \"Passengers on the maiden voyage of the Titanic\") \n```\n:::\n"                                                                        
-[14] ":::{focus-on=\"cr-walkthrough-14\"}\n hello, using `  labs(subtitle = \"stratified by demographics and survival\") `\n:::\n\n:::{#cr-walkthrough-14}\n```{r walkthrough-14}\nlast_plot() +\n    labs(subtitle = \"stratified by demographics and survival\") \n```\n:::\n"                                                                                 </code></pre>
+<pre><code> [1] ":::{focus-on=\"cr-walkthrough-1\"}\n Ok Lets look at this titanic data, using `ggplot(data = titanic_wide) `\n:::\n\n:::{#cr-walkthrough-1}\n```{r walkthrough-1}\n\n  ggplot(data = titanic_wide) \n```\n:::\n"                                                                                                                                                                      
+ [2] ":::{focus-on=\"cr-walkthrough-2\"}\n Here some variables of interest, using `  aes(y = Freq, axis1 = Class, axis2 = Survived) `\n:::\n\n:::{#cr-walkthrough-2}\n```{r walkthrough-2}\nlast_plot() +\n    aes(y = Freq, axis1 = Class, axis2 = Survived) \n```\n:::\n"                                                                                                                 
+ [3] ":::{focus-on=\"cr-walkthrough-3\"}\n in a alluvial plot first look, using `  ggchalkboard::theme_chalkboard(base_size = 18) `\n:::\n\n:::{#cr-walkthrough-3}\n```{r walkthrough-3}\nlast_plot() +\n    ggchalkboard::theme_chalkboard(base_size = 18) \n```\n:::\n"                                                                                                                   
+ [4] ":::{focus-on=\"cr-walkthrough-4\"}\n And we are ready to look at flow, using `  geom_alluvium() `\n:::\n\n:::{#cr-walkthrough-4}\n```{r walkthrough-4}\nlast_plot() +\n    geom_alluvium() \n```\n:::\n"                                                                                                                                                                              
+ [5] ":::{focus-on=\"cr-walkthrough-5\"}\n And we can label our stratumaxes, using `  geom_stratum(aes(fill = NULL)) `\n:::\n\n:::{#cr-walkthrough-5}\n```{r walkthrough-5}\nlast_plot() +\n    geom_stratum(aes(fill = NULL)) \n```\n:::\n"                                                                                                                                                
+ [6] ":::{focus-on=\"cr-walkthrough-6\"}\n the stratum at least really needs outlines, and not intent, but I also didn't mind alluvium outlines, however there are more outlines that I anticipated, using `  aes(color = I(alpha(\"lightyellow\", .5))) `\n:::\n\n:::{#cr-walkthrough-6}\n```{r walkthrough-6}\nlast_plot() +\n    aes(color = I(alpha(\"lightyellow\", .5))) \n```\n:::\n"
+ [7] ":::{focus-on=\"cr-walkthrough-7\"}\n Add stratum labels, using `  geom_stratum_text() `\n:::\n\n:::{#cr-walkthrough-7}\n```{r walkthrough-7}\nlast_plot() +\n    geom_stratum_text() \n```\n:::\n"                                                                                                                                                                                    
+ [8] ":::{focus-on=\"cr-walkthrough-8\"}\n look at sex to survival, using `  aes(axis1 = Sex) `\n:::\n\n:::{#cr-walkthrough-8}\n```{r walkthrough-8}\nlast_plot() +\n    aes(axis1 = Sex) \n```\n:::\n"                                                                                                                                                                                     
+ [9] ":::{focus-on=\"cr-walkthrough-9\"}\n look at age to survival, using `  aes(axis1 = Age) `\n:::\n\n:::{#cr-walkthrough-9}\n```{r walkthrough-9}\nlast_plot() +\n    aes(axis1 = Age) \n```\n:::\n"                                                                                                                                                                                     
+[10] ":::{focus-on=\"cr-walkthrough-10\"}\n age to class to survival, using `  aes(axis2 = Class, axis3 = Survived) `\n:::\n\n:::{#cr-walkthrough-10}\n```{r walkthrough-10}\nlast_plot() +\n    aes(axis2 = Class, axis3 = Survived) \n```\n:::\n"                                                                                                                                         
+[11] ":::{focus-on=\"cr-walkthrough-11\"}\n a train, using `  aes(axis1 = Sex, axis2 = Age, axis3 = Class, axis4 = Survived) `\n:::\n\n:::{#cr-walkthrough-11}\n```{r walkthrough-11}\nlast_plot() +\n    aes(axis1 = Sex, axis2 = Age, axis3 = Class, axis4 = Survived) \n```\n:::\n"                                                                                                      
+[12] ":::{focus-on=\"cr-walkthrough-12\"}\n Track sex throughout, using `  aes(fill = Sex) `\n:::\n\n:::{#cr-walkthrough-12}\n```{r walkthrough-12}\nlast_plot() +\n    aes(fill = Sex) \n```\n:::\n"                                                                                                                                                                                       
+[13] ":::{focus-on=\"cr-walkthrough-13\"}\n remove fill guide as axis1 is labeled, using `  guides(fill = \"none\") `\n:::\n\n:::{#cr-walkthrough-13}\n```{r walkthrough-13}\nlast_plot() +\n    guides(fill = \"none\") \n```\n:::\n"                                                                                                                                                      
+[14] ":::{focus-on=\"cr-walkthrough-14\"}\n adjusting the x axis, using `  scale_x_discrete(limits = c(\"Sex\", \"Age\", \"Class\", \"Survived\"), expand = c(.1, .1)) `\n:::\n\n:::{#cr-walkthrough-14}\n```{r walkthrough-14}\nlast_plot() +\n    scale_x_discrete(limits = c(\"Sex\", \"Age\", \"Class\", \"Survived\"), expand = c(.1, .1)) \n```\n:::\n"                               
+[15] ":::{focus-on=\"cr-walkthrough-15\"}\n An overall label for x axis, using `  labs(x = \"Demographic\") `\n:::\n\n:::{#cr-walkthrough-15}\n```{r walkthrough-15}\nlast_plot() +\n    labs(x = \"Demographic\") \n```\n:::\n"                                                                                                                                                            
+[16] ":::{focus-on=\"cr-walkthrough-16\"}\n adding a caption , using `  labs(caption = \"Passengers on the maiden voyage of the Titanic\") `\n:::\n\n:::{#cr-walkthrough-16}\n```{r walkthrough-16}\nlast_plot() +\n    labs(caption = \"Passengers on the maiden voyage of the Titanic\") \n```\n:::\n"                                                                                    </code></pre>
 </div>
 </div>
 <p>Okay, ready for the closeread demonstration! (Comparing flipbookr/xaringan implementation what we are doing here, there’s probably greater focus on narration.) We’ll use <code>knitr::knit()</code> inline to get this done - <code>paste(knitr::knit(text = to_closeread, quiet = F), collapse = "\n\n")</code></p>
@@ -321,62 +331,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-3">
 <div class="narrative">
-<p>And we are ready to look at flow, using <code>geom_alluvium()</code></p>
+<p>in a alluvial plot first look, using <code>ggchalkboard::theme_chalkboard(base_size = 18)</code></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-4">
 <div class="narrative">
-<p>And we can label our stratumaxes, using <code>geom_stratum(aes(fill = NULL))</code></p>
+<p>And we are ready to look at flow, using <code>geom_alluvium()</code></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-5">
 <div class="narrative">
-<p>Add stratum labels, using <code>geom_stratum_text()</code></p>
+<p>And we can label our stratumaxes, using <code>geom_stratum(aes(fill = NULL))</code></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-6">
 <div class="narrative">
-<p>look at sex to survival, using <code>aes(axis1 = Sex)</code></p>
+<p>the stratum at least really needs outlines, and not intent, but I also didn’t mind alluvium outlines, however there are more outlines that I anticipated, using <code>aes(color = I(alpha("lightyellow", .5)))</code></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-7">
 <div class="narrative">
-<p>look at age to survival, using <code>aes(axis1 = Age)</code></p>
+<p>Add stratum labels, using <code>geom_stratum_text()</code></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-8">
 <div class="narrative">
-<p>age to class to survival, using <code>aes(axis2 = Class, axis3 = Survived)</code></p>
+<p>look at sex to survival, using <code>aes(axis1 = Sex)</code></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-9">
 <div class="narrative">
-<p>a train, using <code>aes(axis1 = Sex, axis2 = Age, axis3 = Class, axis4 = Survived)</code></p>
+<p>look at age to survival, using <code>aes(axis1 = Age)</code></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-10">
 <div class="narrative">
-<p>Track sex throughout, using <code>aes(fill = Sex)</code></p>
+<p>age to class to survival, using <code>aes(axis2 = Class, axis3 = Survived)</code></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-11">
 <div class="narrative">
-<p>adjusting the x axis, using <code>scale_x_discrete(limits = c("Sex", "Age", "Class", "Survived"), expand = c(.05, .05))</code></p>
+<p>a train, using <code>aes(axis1 = Sex, axis2 = Age, axis3 = Class, axis4 = Survived)</code></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-12">
 <div class="narrative">
-<p>An overall label for x axis, using <code>labs(x = "Demographic")</code></p>
+<p>Track sex throughout, using <code>aes(fill = Sex)</code></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-13">
 <div class="narrative">
-<p>hello , using <code>labs(title = "Passengers on the maiden voyage of the Titanic")</code></p>
+<p>remove fill guide as axis1 is labeled, using <code>guides(fill = "none")</code></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-14">
 <div class="narrative">
-<p>hello, using <code>labs(subtitle = "stratified by demographics and survival")</code></p>
+<p>adjusting the x axis, using <code>scale_x_discrete(limits = c("Sex", "Age", "Class", "Survived"), expand = c(.1, .1))</code></p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-walkthrough-15">
+<div class="narrative">
+<p>An overall label for x axis, using <code>labs(x = "Demographic")</code></p>
+</div>
+</div>
+<div class="trigger new-trigger" data-focus-on="cr-walkthrough-16">
+<div class="narrative">
+<p>adding a caption , using <code>labs(caption = "Passengers on the maiden voyage of the Titanic")</code></p>
 </div>
 </div>
 </div>
@@ -384,7 +404,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sticky-col-stack">
 <div id="cr-walkthrough-1" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> titanic_wide) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span> titanic_wide) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -396,8 +416,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-2" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> Freq, <span class="at">axis1 =</span> Class, <span class="at">axis2 =</span> Survived) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y =</span> Freq, <span class="at">axis1 =</span> Class, <span class="at">axis2 =</span> Survived) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -409,8 +429,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-3" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_alluvium</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    ggchalkboard<span class="sc">::</span><span class="fu">theme_chalkboard</span>(<span class="at">base_size =</span> <span class="dv">18</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -422,8 +442,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-4" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_stratum</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="cn">NULL</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_alluvium</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -435,8 +455,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-5" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_stratum_text</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_stratum</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="cn">NULL</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -448,8 +468,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-6" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">axis1 =</span> Sex) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">I</span>(<span class="fu">alpha</span>(<span class="st">"lightyellow"</span>, .<span class="dv">5</span>))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -461,8 +481,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-7" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">axis1 =</span> Age) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_stratum_text</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -474,8 +494,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-8" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">axis2 =</span> Class, <span class="at">axis3 =</span> Survived) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">axis1 =</span> Sex) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -487,8 +507,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-9" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">axis1 =</span> Sex, <span class="at">axis2 =</span> Age, <span class="at">axis3 =</span> Class, <span class="at">axis4 =</span> Survived) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">axis1 =</span> Age) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -500,8 +520,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-10" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> Sex) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">axis2 =</span> Class, <span class="at">axis3 =</span> Survived) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -513,8 +533,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-11" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"Sex"</span>, <span class="st">"Age"</span>, <span class="st">"Class"</span>, <span class="st">"Survived"</span>), <span class="at">expand =</span> <span class="fu">c</span>(.<span class="dv">05</span>, .<span class="dv">05</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">axis1 =</span> Sex, <span class="at">axis2 =</span> Age, <span class="at">axis3 =</span> Class, <span class="at">axis4 =</span> Survived) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -526,8 +546,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-12" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Demographic"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> Sex) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -539,8 +559,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-13" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Passengers on the maiden voyage of the Titanic"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -552,12 +572,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="cr-walkthrough-14" class="sticky">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"stratified by demographics and survival"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"Sex"</span>, <span class="st">"Age"</span>, <span class="st">"Class"</span>, <span class="st">"Survived"</span>), <span class="at">expand =</span> <span class="fu">c</span>(.<span class="dv">1</span>, .<span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="ggalluvial_files/figure-html/walkthrough-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="cr-walkthrough-15" class="sticky">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Demographic"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ggalluvial_files/figure-html/walkthrough-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="cr-walkthrough-16" class="sticky">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">"Passengers on the maiden voyage of the Titanic"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ggalluvial_files/figure-html/walkthrough-16-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

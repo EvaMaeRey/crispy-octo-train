@@ -29,10 +29,15 @@ head(titanic_wide)
 #> 
 
 StatStratum$default_aes <- aes(label = after_stat(stratum))
-geom_stratum_text <- function(...){geom_text(stat = "stratum", ...)}
+geom_stratum_text <- function(...){geom_text(stat = StatStratum, ...)}
+
+GeomStratum$default_aes # hardcoded
+GeomRect$default_aes
+GeomStratum$default_aes <- GeomRect$default_aes
 
 
-GeomStratum$default_aes
+
+
 ```
 
 
@@ -42,18 +47,20 @@ Here is a graphical poem!
 ```{r walkthrough, include = T}
 ggplot(data = titanic_wide) + # Ok Lets look at this titanic data
   aes(y = Freq, axis1 = Class, axis2 = Survived) + # Here some variables of interest
+  ggchalkboard::theme_chalkboard(base_size = 18) + # in a alluvial plot first look
   geom_alluvium() + # And we are ready to look at flow
   geom_stratum(aes(fill = NULL)) + # And we can label our stratumaxes
+  aes(color = I(alpha("lightyellow", .5))) + # the stratum at least really needs outlines, and not intent, but I also didn't mind alluvium outlines, however there are more outlines that I anticipated
   geom_stratum_text() + # Add stratum labels
   aes(axis1 = Sex) + # look at sex to survival
   aes(axis1 = Age) + # look at age to survival
   aes(axis2 = Class, axis3 = Survived) + # age to class to survival
-  aes(axis1 = Sex, axis2 = Age, axis3 = Class, axis4 = Survived) # a train
+  aes(axis1 = Sex, axis2 = Age, axis3 = Class, axis4 = Survived) + # a train
   aes(fill = Sex) + # Track sex throughout
-  scale_x_discrete(limits = c("Sex", "Age", "Class", "Survived"), expand = c(.05, .05)) + # adjusting the x axis
+  guides(fill = "none") + # remove fill guide as axis1 is labeled
+  scale_x_discrete(limits = c("Sex", "Age", "Class", "Survived"), expand = c(.1, .1)) + # adjusting the x axis
   labs(x = "Demographic") + # An overall label for x axis
-  labs(title = "Passengers on the maiden voyage of the Titanic") + # hello 
-  labs(subtitle = "stratified by demographics and survival") # hello
+  labs(caption = "Passengers on the maiden voyage of the Titanic") # adding a caption 
 ```
 
 Closeread helps walk people through and digest ideas suggesting a synergy with the gg world.  With Closereads, maybe we can read this graphical poem 'aloud', and reflect on it a bit in plain language as we go.  Here is a generic way to write out what `closereads` requires for creating plot output and referring to it.
