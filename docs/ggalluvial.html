@@ -214,7 +214,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>StatStratum<span class="sc">$</span>default_aes <span class="ot">&lt;-</span> <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">after_stat</span>(stratum))</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>geom_stratum_text <span class="ot">&lt;-</span> <span class="cf">function</span>(...){<span class="fu">geom_text</span>(<span class="at">stat =</span> StatStratum, ...)}</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>GeomStratum<span class="sc">$</span>default_aes <span class="co"># hardcoded</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggalluvial)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>GeomStratum<span class="sc">$</span>default_aes <span class="co"># hardcoded</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Aesthetic mapping: 
 * `size`      -&gt; 0.5
@@ -233,15 +236,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 * `linetype`  -&gt; `from_theme(bordertype)`
 * `alpha`     -&gt; NA</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>GeomStratum<span class="sc">$</span>default_aes <span class="ot">&lt;-</span> GeomRect<span class="sc">$</span>default_aes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>GeomStratum<span class="sc">$</span>default_aes <span class="ot">&lt;-</span> GeomRect<span class="sc">$</span>default_aes</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>GeomStratum<span class="sc">$</span>default_aes <span class="ot">&lt;-</span> <span class="fu">modifyList</span>(GeomRect<span class="sc">$</span>default_aes, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">from_theme</span>(ggplot2<span class="sc">:::</span><span class="fu">col_mix</span>(ink, paper, <span class="fl">0.15</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here is a graphical poem!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> titanic_wide) <span class="sc">+</span> <span class="co"># Ok Lets look at this titanic data</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> Freq, <span class="at">axis1 =</span> Sex, <span class="at">axis2 =</span> Survived) <span class="sc">+</span> <span class="co"># Here some variables of interest</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  ggchalkboard<span class="sc">::</span><span class="fu">theme_chalkboard</span>(<span class="at">base_size =</span> <span class="dv">18</span>) <span class="sc">+</span> <span class="co"># in a alluvial plot first look</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  ggchalkboard<span class="sc">:::</span><span class="fu">theme_slateboard</span>(<span class="at">base_size =</span> <span class="dv">18</span>) <span class="sc">+</span> <span class="co"># in a alluvial plot first look</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_alluvium</span>() <span class="sc">+</span> <span class="co"># And we are ready to look at flow</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_stratum</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="cn">NULL</span>), <span class="at">color =</span> <span class="fu">alpha</span>(<span class="st">"lightyellow"</span>, .<span class="dv">5</span>)) <span class="sc">+</span> <span class="co"># And we can label our stratum axes</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_stratum</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="cn">NULL</span>)) <span class="sc">+</span> <span class="co"># And we can label our stratum axes</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_stratum_text</span>() <span class="sc">+</span> <span class="co"># Add stratum labels</span></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">axis1 =</span> Age) <span class="sc">+</span> <span class="co"># look at age to survival</span></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">axis1 =</span> Class) <span class="sc">+</span> <span class="co"># look at class to survival</span></span>
@@ -305,9 +310,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] ":::{focus-on=\"cr-walkthrough-1\"}\n Ok Lets look at this titanic data, using `ggplot(data = titanic_wide) `\n:::\n\n:::{#cr-walkthrough-1}\n```{r walkthrough-1}\n\n  ggplot(data = titanic_wide) \n```\n:::\n"                                                                                                                                       
  [2] ":::{focus-on=\"cr-walkthrough-2\"}\n Here some variables of interest, using `  aes(y = Freq, axis1 = Sex, axis2 = Survived) `\n:::\n\n:::{#cr-walkthrough-2}\n```{r walkthrough-2}\nlast_plot() +\n    aes(y = Freq, axis1 = Sex, axis2 = Survived) \n```\n:::\n"                                                                                      
- [3] ":::{focus-on=\"cr-walkthrough-3\"}\n in a alluvial plot first look, using `  ggchalkboard::theme_chalkboard(base_size = 18) `\n:::\n\n:::{#cr-walkthrough-3}\n```{r walkthrough-3}\nlast_plot() +\n    ggchalkboard::theme_chalkboard(base_size = 18) \n```\n:::\n"                                                                                    
+ [3] ":::{focus-on=\"cr-walkthrough-3\"}\n in a alluvial plot first look, using `  ggchalkboard:::theme_slateboard(base_size = 18) `\n:::\n\n:::{#cr-walkthrough-3}\n```{r walkthrough-3}\nlast_plot() +\n    ggchalkboard:::theme_slateboard(base_size = 18) \n```\n:::\n"                                                                                  
  [4] ":::{focus-on=\"cr-walkthrough-4\"}\n And we are ready to look at flow, using `  geom_alluvium() `\n:::\n\n:::{#cr-walkthrough-4}\n```{r walkthrough-4}\nlast_plot() +\n    geom_alluvium() \n```\n:::\n"                                                                                                                                               
- [5] ":::{focus-on=\"cr-walkthrough-5\"}\n And we can label our stratum axes, using `  geom_stratum(aes(fill = NULL), color = alpha(\"lightyellow\", .5)) `\n:::\n\n:::{#cr-walkthrough-5}\n```{r walkthrough-5}\nlast_plot() +\n    geom_stratum(aes(fill = NULL), color = alpha(\"lightyellow\", .5)) \n```\n:::\n"                                        
+ [5] ":::{focus-on=\"cr-walkthrough-5\"}\n And we can label our stratum axes, using `  geom_stratum(aes(fill = NULL)) `\n:::\n\n:::{#cr-walkthrough-5}\n```{r walkthrough-5}\nlast_plot() +\n    geom_stratum(aes(fill = NULL)) \n```\n:::\n"                                                                                                                
  [6] ":::{focus-on=\"cr-walkthrough-6\"}\n Add stratum labels, using `  geom_stratum_text() `\n:::\n\n:::{#cr-walkthrough-6}\n```{r walkthrough-6}\nlast_plot() +\n    geom_stratum_text() \n```\n:::\n"                                                                                                                                                     
  [7] ":::{focus-on=\"cr-walkthrough-7\"}\n look at age to survival, using `  aes(axis1 = Age) `\n:::\n\n:::{#cr-walkthrough-7}\n```{r walkthrough-7}\nlast_plot() +\n    aes(axis1 = Age) \n```\n:::\n"                                                                                                                                                      
  [8] ":::{focus-on=\"cr-walkthrough-8\"}\n look at class to survival, using `  aes(axis1 = Class) `\n:::\n\n:::{#cr-walkthrough-8}\n```{r walkthrough-8}\nlast_plot() +\n    aes(axis1 = Class) \n```\n:::\n"                                                                                                                                                
@@ -341,7 +346,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-3">
 <div class="narrative">
-<p>in a alluvial plot first look, using <code>ggchalkboard::theme_chalkboard(base_size = 18)</code></p>
+<p>in a alluvial plot first look, using <code>ggchalkboard:::theme_slateboard(base_size = 18)</code></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-4">
@@ -351,7 +356,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-5">
 <div class="narrative">
-<p>And we can label our stratum axes, using <code>geom_stratum(aes(fill = NULL), color = alpha("lightyellow", .5))</code></p>
+<p>And we can label our stratum axes, using <code>geom_stratum(aes(fill = NULL))</code></p>
 </div>
 </div>
 <div class="trigger new-trigger" data-focus-on="cr-walkthrough-6">
@@ -465,7 +470,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="cr-walkthrough-3" class="sticky">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    ggchalkboard<span class="sc">::</span><span class="fu">theme_chalkboard</span>(<span class="at">base_size =</span> <span class="dv">18</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    ggchalkboard<span class="sc">:::</span><span class="fu">theme_slateboard</span>(<span class="at">base_size =</span> <span class="dv">18</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -491,7 +496,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="cr-walkthrough-5" class="sticky">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_stratum</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="cn">NULL</span>), <span class="at">color =</span> <span class="fu">alpha</span>(<span class="st">"lightyellow"</span>, .<span class="dv">5</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_stratum</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="cn">NULL</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

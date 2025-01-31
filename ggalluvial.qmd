@@ -31,12 +31,14 @@ head(titanic_wide)
 StatStratum$default_aes <- aes(label = after_stat(stratum))
 geom_stratum_text <- function(...){geom_text(stat = StatStratum, ...)}
 
+library(ggplot2)
+library(ggalluvial)
+
 GeomStratum$default_aes # hardcoded
 GeomRect$default_aes
 GeomStratum$default_aes <- GeomRect$default_aes
-
-
-
+GeomStratum$default_aes <- modifyList(GeomRect$default_aes, 
+                                      aes(color = from_theme(ggplot2:::col_mix(ink, paper, 0.15))))
 
 ```
 
@@ -47,9 +49,9 @@ Here is a graphical poem!
 ```{r walkthrough, include = T}
 ggplot(data = titanic_wide) + # Ok Lets look at this titanic data
   aes(y = Freq, axis1 = Sex, axis2 = Survived) + # Here some variables of interest
-  ggchalkboard::theme_chalkboard(base_size = 18) + # in a alluvial plot first look
+  ggchalkboard:::theme_slateboard(base_size = 18) + # in a alluvial plot first look
   geom_alluvium() + # And we are ready to look at flow
-  geom_stratum(aes(fill = NULL), color = alpha("lightyellow", .5)) + # And we can label our stratum axes
+  geom_stratum(aes(fill = NULL)) + # And we can label our stratum axes
   geom_stratum_text() + # Add stratum labels
   aes(axis1 = Age) + # look at age to survival
   aes(axis1 = Class) + # look at class to survival
